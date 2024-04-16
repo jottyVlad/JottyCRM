@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JottyCRM", "JottyCRM\JottyCRM.csproj", "{76F15973-B66A-4FC3-8F6D-FCBE1BD6B08A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76F15973-B66A-4FC3-8F6D-FCBE1BD6B08A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F15973-B66A-4FC3-8F6D-FCBE1BD6B08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F15973-B66A-4FC3-8F6D-FCBE1BD6B08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F15973-B66A-4FC3-8F6D-FCBE1BD6B08A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35CC6C30-08ED-444C-8133-54E892D4984E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+﻿<Application x:Class="JottyCRM.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:JottyCRM.MVVM.ViewModel"
+             xmlns:view="clr-namespace:JottyCRM.MVVM.View">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <!-- Theme setting -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!--<DataTemplate DataType="{x:Type TypeName=viewModel:LoginViewModel}">
+                <view:LoginPage />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
+                <view:HomePage />
+            </DataTemplate>-->
+
+            <FontFamily x:Key="Klukva">pack://application:,,,/Fonts/#Klukva</FontFamily>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

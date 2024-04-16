@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="JottyCRM.MVVM.View.WelcomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:JottyCRM.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="900">
+    <Grid Background="Wheat" Height="600" Width="900">
+        <Button x:Name="LoginButton" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Content="Авторизоваться" 
+                Margin="344,185,344,217"
+                Height="50"
+                Width="150"
+                Command="{Binding NavigateLoginCommand}"/>
+        <Button x:Name="RegistrationButton" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Зарегистрироваться" Margin="333,250,333,165" Height="50" Width="150"/>
+    </Grid>
+</UserControl>
