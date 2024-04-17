@@ -48,7 +48,7 @@ namespace JottyCRM.repositories
                 User _user = await DbContext.Users.FirstAsync(predicate: (user) => user.Login == login);
                 return _user;
             }
-            catch(ArgumentNullException)
+            catch
             {
                 return null;
             }
