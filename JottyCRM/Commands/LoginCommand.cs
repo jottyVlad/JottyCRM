@@ -1,9 +1,8 @@
 ﻿using JottyCRM.Core;
-using JottyCRM.Models;
-using JottyCRM.MVVM.ViewModel;
 using JottyCRM.services;
+using JottyCRM.ViewModel;
 
-namespace JottyCRM.MVVM.Commands
+namespace JottyCRM.Commands
 {
     public class LoginCommand : BaseCommand
     {

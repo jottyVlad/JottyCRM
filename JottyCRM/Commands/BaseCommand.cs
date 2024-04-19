@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace JottyCRM.MVVM.Commands
+namespace JottyCRM.Commands
 {
     public abstract class BaseCommand : ICommand
     {

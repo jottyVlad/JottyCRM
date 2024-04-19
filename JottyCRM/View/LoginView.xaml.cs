@@ -1,10 +1,10 @@
 ﻿using System.Windows.Controls;
 
-namespace JottyCRM.MVVM.View
+namespace JottyCRM.View
 {
-    public partial class HomeView : UserControl
+    public partial class LoginView : UserControl
     {
-        public HomeView()
+        public LoginView()
         {
             InitializeComponent();
         }

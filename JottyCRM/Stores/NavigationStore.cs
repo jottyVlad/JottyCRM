@@ -1,5 +1,5 @@
 ﻿using System;
-using JottyCRM.MVVM.ViewModel;
+using JottyCRM.ViewModel;
 
 namespace JottyCRM.Core
 {

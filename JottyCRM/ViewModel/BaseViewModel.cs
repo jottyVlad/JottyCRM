@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace JottyCRM.MVVM.ViewModel
+namespace JottyCRM.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged, IDisposable
     {

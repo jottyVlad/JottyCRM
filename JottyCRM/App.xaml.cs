@@ -1,4 +1,4 @@
-﻿using JottyCRM.MVVM.View;
+﻿using JottyCRM.View;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
@@ -11,10 +11,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using JottyCRM.Core;
-using JottyCRM.MVVM.ViewModel;
 using JottyCRM.repositories;
 using JottyCRM.services;
+using JottyCRM.ViewModel;
 using Mehdime.Entity;
+using MainWindow = JottyCRM.View.MainWindow;
 
 namespace JottyCRM
 {
@@ -41,11 +42,18 @@ namespace JottyCRM
                 s.GetRequiredService<IUserRepository>()
             ));
 
-            services.AddTransient<WelcomeViewModel>(s => new WelcomeViewModel(CreateLoginNavigationService(s)));
+            services.AddTransient<WelcomeViewModel>(s => new WelcomeViewModel(
+                CreateLoginNavigationService(s),
+                CreateRegistrationNavigationService(s)));
             
             services.AddSingleton<INavigationService>(CreateWelcomeNavigationService);
             
             services.AddTransient<LoginViewModel>(s => new LoginViewModel(
+                s.GetRequiredService<UserStore>(),
+                s.GetRequiredService<IUserService>(),
+                CreateHomeNavigationService(s)));
+
+            services.AddTransient<RegistrationViewModel>(s => new RegistrationViewModel(
                 s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<IUserService>(),
                 CreateHomeNavigationService(s)));
@@ -75,6 +83,13 @@ namespace JottyCRM
             return new NavigationService<LoginViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 serviceProvider.GetRequiredService<LoginViewModel>);
+        }
+
+        private INavigationService CreateRegistrationNavigationService(IServiceProvider serviceProvider)
+        {
+            return new NavigationService<RegistrationViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                serviceProvider.GetRequiredService<RegistrationViewModel>);
         }
 
         private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Navigation;
 using JottyCRM.Core;
-using JottyCRM.MVVM.ViewModel;
+using JottyCRM.ViewModel;
 
 namespace JottyCRM.services
 {
