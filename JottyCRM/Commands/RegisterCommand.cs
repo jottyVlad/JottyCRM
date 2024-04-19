@@ -1,9 +1,9 @@
 using System.Windows.Forms;
 using JottyCRM.Core;
-using JottyCRM.MVVM.ViewModel;
 using JottyCRM.services;
+using JottyCRM.ViewModel;
 
-namespace JottyCRM.MVVM.Commands
+namespace JottyCRM.Commands
 {
     public class RegisterCommand : BaseCommand
     {

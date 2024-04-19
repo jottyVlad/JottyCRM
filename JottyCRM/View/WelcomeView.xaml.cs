@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace JottyCRM.MVVM.View
+namespace JottyCRM.View
 {
     public partial class WelcomeView : UserControl
     {

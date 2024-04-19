@@ -1,9 +1,8 @@
 ﻿using System.Windows.Input;
-using JottyCRM.Core;
-using JottyCRM.MVVM.Commands;
+using JottyCRM.Commands;
 using JottyCRM.services;
 
-namespace JottyCRM.MVVM.ViewModel
+namespace JottyCRM.ViewModel
 {
     public class WelcomeViewModel : BaseViewModel
     {

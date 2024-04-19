@@ -1,7 +1,6 @@
 ﻿using JottyCRM.Core;
-using JottyCRM.Models;
 
-namespace JottyCRM.MVVM.ViewModel
+namespace JottyCRM.ViewModel
 {
     public class HomeViewModel : BaseViewModel
     {

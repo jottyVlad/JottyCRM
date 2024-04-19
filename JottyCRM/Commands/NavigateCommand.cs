@@ -1,9 +1,6 @@
-﻿using System.Windows.Input;
-using JottyCRM.Core;
-using JottyCRM.MVVM.ViewModel;
-using JottyCRM.services;
+﻿using JottyCRM.services;
 
-namespace JottyCRM.MVVM.Commands
+namespace JottyCRM.Commands
 {
     public class NavigateCommand : BaseCommand
     {

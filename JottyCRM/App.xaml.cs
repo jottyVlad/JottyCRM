@@ -1,4 +1,4 @@
-﻿using JottyCRM.MVVM.View;
+﻿using JottyCRM.View;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
@@ -11,10 +11,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using JottyCRM.Core;
-using JottyCRM.MVVM.ViewModel;
 using JottyCRM.repositories;
 using JottyCRM.services;
+using JottyCRM.ViewModel;
 using Mehdime.Entity;
+using MainWindow = JottyCRM.View.MainWindow;
 
 namespace JottyCRM
 {

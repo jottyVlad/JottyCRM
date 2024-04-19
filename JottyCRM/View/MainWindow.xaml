@@ -3,28 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:JottyCRM.MVVM.ViewModel"
-        xmlns:views="clr-namespace:JottyCRM.MVVM.View"
-        xmlns:local="clr-namespace:JottyCRM.MVVM.View"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="JottyCRM.MVVM.View.MainWindow"
+        xmlns:views="clr-namespace:JottyCRM.View"
+        xmlns:local="clr-namespace:JottyCRM.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="JottyCRM.View.MainWindow"
         mc:Ignorable="d"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:view="clr-namespace:JottyCRM.View"
+        xmlns:viewModels="clr-namespace:JottyCRM.ViewModel"
         Title="JottyCRM" Height="600" Width="900"
         ResizeMode="NoResize">
     
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
-                <views:WelcomeView />
+                <view:WelcomeView />
             </DataTemplate>    
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <views:LoginView />
+                <view:LoginView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
-                <views:RegistrationView />
+                <view:RegistrationView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
-                <views:HomeView />
+                <view:HomeView />
             </DataTemplate>
         </Grid.Resources>    
         <ContentControl Content="{Binding CurrentViewModel}" />
