@@ -10,10 +10,13 @@ namespace JottyCRM.MVVM.ViewModel
         public string Name => "WelcomeViewModel";
 
         public ICommand NavigateLoginCommand { get; }
+        public ICommand NavigateRegistrationCommand { get; }
 
-        public WelcomeViewModel(INavigationService loginNavigationService)
+        public WelcomeViewModel(INavigationService loginNavigationService, 
+            INavigationService registrationNavigationService)
         {
             NavigateLoginCommand = new NavigateCommand(loginNavigationService);
+            NavigateRegistrationCommand = new NavigateCommand(registrationNavigationService);
         }
     }
 }

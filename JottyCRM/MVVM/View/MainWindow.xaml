@@ -20,17 +20,13 @@
             <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                 <views:LoginView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
+                <views:RegistrationView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <views:HomeView />
             </DataTemplate>
         </Grid.Resources>    
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
-    <!--<Frame Name="MainFrame" Background="White" NavigationUIVisibility="Hidden" />-->
-    <!--<Grid Background="Wheat">
-        <Button x:Name="LoginButton" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Авторизоваться" Margin="344,185,344,217" Command="{Binding NavigateToLoginCommand}"/>
-        <Button x:Name="RegistrationButton" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Зарегистрироваться" Margin="333,237,333,165" />
-        ~1~<ContentControl Grid.Column="0" Content="{Binding Navigation.CurrentView}">
-        </ContentControl>@1@
-    </Grid>-->
 </mah:MetroWindow>

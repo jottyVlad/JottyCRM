@@ -13,6 +13,7 @@ namespace JottyCRM.services
     public interface IUserService
     {
         Task<UserAuthorized> TryAuthorize(string login, string password);
+        UserRegistered Create(string name, string login, string email, string password);
     }
     public class UserService : IUserService
     {
@@ -25,11 +26,11 @@ namespace JottyCRM.services
             if(dbContextScopeFactory == null) throw new ArgumentNullException(nameof(dbContextScopeFactory));
             if(repository == null) throw new ArgumentNullException(nameof(repository));
 
-            this._dbContextScopeFactory = dbContextScopeFactory;
-            this._repository = repository;
+            _dbContextScopeFactory = dbContextScopeFactory;
+            _repository = repository;
         }
 
-        public static String sha256_hash(String value)
+        private static String sha256_hash(String value)
         {
             using (SHA256 hash = SHA256Managed.Create())
             {
@@ -62,17 +63,61 @@ namespace JottyCRM.services
             else
                 return new UserAuthorized(null, false);
         }
+        
+        public UserRegistered Create(string name, string login, string email, string password)
+        {
+            if (name == null || login == null || email == null || password == null)
+            {
+                return new UserRegistered(null, false, "Все поля должны быть заполнены!");
+            }
+
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                if (_repository.IsLoginExists(login))
+                {
+                    return new UserRegistered(null, false, "Пользователь с таким логином уже существует!");
+                }
+
+                if (_repository.IsEmailExists(email))
+                {
+                    return new UserRegistered(null, false, "Пользователь с таким email уже существует!");
+                }
+
+                string passwordHashed = sha256_hash(password);
+
+                User user = new User()
+                {
+                    Name = name,
+                    Login = login,
+                    Email = email,
+                    Password = passwordHashed
+                };
+                _repository.Create(user);
+                dbContextScope.SaveChanges();
+                return new UserRegistered(user, true, "");
+            }
+        }
     }
 
     public class UserAuthorized
     {
-        public User UserObject { get; private set; }
-        public bool StatusCode { get; private set; }
+        public readonly User UserObject;
+        public readonly bool StatusCode;
 
         public UserAuthorized(User user, bool status)
         {
-            this.UserObject = user;
-            this.StatusCode = status;
+            UserObject = user;
+            StatusCode = status;
+        }
+    }
+
+    public class UserRegistered : UserAuthorized
+    {
+        public readonly string ErrorMessage;
+
+        public UserRegistered(User user, bool status, string errorMessage) : base(user, status)
+        {
+            ErrorMessage = errorMessage;
         }
     }
 }

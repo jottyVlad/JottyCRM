@@ -15,6 +15,13 @@
                 Height="50"
                 Width="150"
                 Command="{Binding NavigateLoginCommand}"/>
-        <Button x:Name="RegistrationButton" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Зарегистрироваться" Margin="333,250,333,165" Height="50" Width="150"/>
+        <Button x:Name="RegistrationButton" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Content="Зарегистрироваться" 
+                Margin="333,250,333,165" 
+                Height="50" 
+                Width="150"
+                Command="{Binding NavigateRegistrationCommand}"/>
     </Grid>
 </UserControl>

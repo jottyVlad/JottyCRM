@@ -14,6 +14,8 @@ namespace JottyCRM.repositories
     {
         Task<User> GetUserByLoginAsync(string login);
         User Create(User user);
+        bool IsEmailExists(string email);
+        bool IsLoginExists(string login);
     }
 
     public class UserRepository : IUserRepository
@@ -53,6 +55,9 @@ namespace JottyCRM.repositories
                 return null;
             }
         }
+
+        public bool IsEmailExists(string email) => DbContext.Users.Any(s => s.Email == email);
+        public bool IsLoginExists(string login) => DbContext.Users.Any(s => s.Login == login);
 
         public User Create(User user)
         {

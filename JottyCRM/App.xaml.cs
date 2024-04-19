@@ -41,11 +41,18 @@ namespace JottyCRM
                 s.GetRequiredService<IUserRepository>()
             ));
 
-            services.AddTransient<WelcomeViewModel>(s => new WelcomeViewModel(CreateLoginNavigationService(s)));
+            services.AddTransient<WelcomeViewModel>(s => new WelcomeViewModel(
+                CreateLoginNavigationService(s),
+                CreateRegistrationNavigationService(s)));
             
             services.AddSingleton<INavigationService>(CreateWelcomeNavigationService);
             
             services.AddTransient<LoginViewModel>(s => new LoginViewModel(
+                s.GetRequiredService<UserStore>(),
+                s.GetRequiredService<IUserService>(),
+                CreateHomeNavigationService(s)));
+
+            services.AddTransient<RegistrationViewModel>(s => new RegistrationViewModel(
                 s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<IUserService>(),
                 CreateHomeNavigationService(s)));
@@ -75,6 +82,13 @@ namespace JottyCRM
             return new NavigationService<LoginViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 serviceProvider.GetRequiredService<LoginViewModel>);
+        }
+
+        private INavigationService CreateRegistrationNavigationService(IServiceProvider serviceProvider)
+        {
+            return new NavigationService<RegistrationViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                serviceProvider.GetRequiredService<RegistrationViewModel>);
         }
 
         private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
