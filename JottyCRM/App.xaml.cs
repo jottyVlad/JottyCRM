@@ -32,6 +32,7 @@ namespace JottyCRM
 
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<UserStore>();
+            services.AddSingleton<WindowNavigationStore>();
             
             services.AddSingleton<AmbientDbContextLocator>();
             services.AddSingleton<DbContextScopeFactory>();
@@ -41,6 +42,8 @@ namespace JottyCRM
                 s.GetRequiredService<DbContextScopeFactory>(),
                 s.GetRequiredService<IUserRepository>()
             ));
+            
+            services.AddSingleton<CloseWindowNavigationService>();
 
             services.AddTransient<WelcomeViewModel>(s => new WelcomeViewModel(
                 CreateLoginNavigationService(s),
@@ -48,15 +51,9 @@ namespace JottyCRM
             
             services.AddSingleton<INavigationService>(CreateWelcomeNavigationService);
             
-            services.AddTransient<LoginViewModel>(s => new LoginViewModel(
-                s.GetRequiredService<UserStore>(),
-                s.GetRequiredService<IUserService>(),
-                CreateHomeNavigationService(s)));
+            services.AddTransient<LoginViewModel>(CreateLoginViewModel);
 
-            services.AddTransient<RegistrationViewModel>(s => new RegistrationViewModel(
-                s.GetRequiredService<UserStore>(),
-                s.GetRequiredService<IUserService>(),
-                CreateHomeNavigationService(s)));
+            services.AddTransient<RegistrationViewModel>(CreateRegistrationViewModel);
 
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(
                 s.GetRequiredService<UserStore>()));
@@ -80,16 +77,52 @@ namespace JottyCRM
         
         private INavigationService CreateLoginNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<LoginViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
+            return new WindowNavigationService<LoginViewModel>(
+                serviceProvider.GetRequiredService<WindowNavigationStore>(),
                 serviceProvider.GetRequiredService<LoginViewModel>);
+        }
+
+        private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService loginNavigationService = new CompositeNavigationService(
+                serviceProvider.GetRequiredService<CloseWindowNavigationService>(),
+                CreateHomeNavigationService(serviceProvider));
+
+            CloseWindowNavigationService closeNavigationService = new CloseWindowNavigationService(
+                serviceProvider.GetRequiredService<WindowNavigationStore>()
+            );
+
+            return new LoginViewModel(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<IUserService>(),
+                loginNavigationService,
+                closeNavigationService
+                );
         }
 
         private INavigationService CreateRegistrationNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<RegistrationViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
+            return new WindowNavigationService<RegistrationViewModel>(
+                serviceProvider.GetRequiredService<WindowNavigationStore>(),
                 serviceProvider.GetRequiredService<RegistrationViewModel>);
+        }
+
+        private RegistrationViewModel CreateRegistrationViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService registrationNavigationService = new CompositeNavigationService(
+                serviceProvider.GetRequiredService<CloseWindowNavigationService>(),
+                CreateHomeNavigationService(serviceProvider));
+
+            CloseWindowNavigationService closeNavigationService = new CloseWindowNavigationService(
+                serviceProvider.GetRequiredService<WindowNavigationStore>()
+            );
+
+            return new RegistrationViewModel(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<IUserService>(),
+                registrationNavigationService,
+                closeNavigationService
+            );
         }
 
         private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)

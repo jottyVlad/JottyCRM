@@ -27,6 +27,8 @@ namespace JottyCRM.Commands
             string login = _loginViewModel.Login;
             string password = _loginViewModel.Password;
 
+            _loginViewModel.Login = "55";
+
             UserAuthorized authorizedStatus = await _userService.TryAuthorize(login, password);
 
             if (!authorizedStatus.StatusCode)

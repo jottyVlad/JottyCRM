@@ -1,6 +1,6 @@
-﻿using JottyCRM.repositories;
+﻿using System.Windows;
+using JottyCRM.repositories;
 using JottyCRM.services;
-using MahApps.Metro.Controls;
 using Mehdime.Entity;
 
 namespace JottyCRM.View
@@ -8,7 +8,7 @@ namespace JottyCRM.View
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : Window
     {
         /*public MainWindow()
         {
