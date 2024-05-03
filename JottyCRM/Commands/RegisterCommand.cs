@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 using JottyCRM.Core;
-using JottyCRM.services;
+using JottyCRM.Services;
 using JottyCRM.ViewModel;
 
 namespace JottyCRM.Commands

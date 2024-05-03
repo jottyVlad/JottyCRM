@@ -2,7 +2,7 @@ using System;
 using JottyCRM.Core;
 using JottyCRM.ViewModel;
 
-namespace JottyCRM.services
+namespace JottyCRM.Services
 {
     public class WindowNavigationService<TViewModel> : INavigationService where TViewModel : BaseViewModel
     {

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using JottyCRM.repositories;
-using JottyCRM.services;
+using JottyCRM.Services;
 using Mehdime.Entity;
 
 namespace JottyCRM.View
@@ -10,26 +11,16 @@ namespace JottyCRM.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*public MainWindow()
-        {
-            InitializeComponent();
-        }*/
-        /*
-        private MetroWindow _mainWindowService;
-        */
         public MainWindow()
         {
             InitializeComponent();
             
-            var dbContextScopeFactory = new DbContextScopeFactory();
-            var ambientDbContextLocator = new AmbientDbContextLocator();
-            var userRepository = new UserRepository(ambientDbContextLocator);
-
-            var userService = new UserService(dbContextScopeFactory, userRepository);
-            
-            /*
-            MainFrame.Content = new MainFramePage(MainFrame, userService);
-        */
+        }
+        
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            DragMove();
         }
     }
 }

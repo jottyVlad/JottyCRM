@@ -14,7 +14,8 @@
 
             <FontFamily x:Key="Klukva">pack://application:,,,/Fonts/#Klukva</FontFamily>
             <ImageSource x:Key="JottyLogo">pack://application:,,,/Images/logo.jpg</ImageSource>
-            <ImageSource x:Key="CloseIcon">pack://application:,,,/Images/close.png</ImageSource>
+            <ImageSource x:Key="CloseIconWhite">pack://application:,,,/Images/closeWhite.png</ImageSource>
+            <ImageSource x:Key="CloseIconBlack">pack://application:,,,/Images/closeBlack.png</ImageSource>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

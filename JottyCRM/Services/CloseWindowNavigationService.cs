@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using JottyCRM.Core;
 
-namespace JottyCRM.services
+namespace JottyCRM.Services
 {
     public class CloseWindowNavigationService : INavigationService
     {

@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JottyCRM.services
+namespace JottyCRM.Services
 {
     public interface IUserService
     {

@@ -20,7 +20,7 @@
         <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
             <StackPanel>
                 <Image Margin="0 20 25 0" 
-                       Source="{StaticResource CloseIcon}" 
+                       Source="{StaticResource CloseIconBlack}" 
                        Height="20" 
                        Opacity="0.6" 
                        HorizontalAlignment="Right"

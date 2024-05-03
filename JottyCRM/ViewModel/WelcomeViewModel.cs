@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using JottyCRM.Commands;
-using JottyCRM.services;
+using JottyCRM.Services;
 
 namespace JottyCRM.ViewModel
 {

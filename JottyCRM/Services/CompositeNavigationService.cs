@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace JottyCRM.services
+namespace JottyCRM.Services
 {
     public class CompositeNavigationService : INavigationService
     {

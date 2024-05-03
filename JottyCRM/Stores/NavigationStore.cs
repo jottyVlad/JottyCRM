@@ -1,7 +1,7 @@
 ﻿using System;
 using JottyCRM.ViewModel;
 
-namespace JottyCRM.Core
+namespace JottyCRM.Stores
 {
     public interface INavigationStore
     {

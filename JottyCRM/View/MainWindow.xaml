@@ -9,8 +9,13 @@
         mc:Ignorable="d"
         xmlns:view="clr-namespace:JottyCRM.View"
         xmlns:viewModels="clr-namespace:JottyCRM.ViewModel"
-        Title="JottyCRM" Height="600" Width="900"
-        ResizeMode="NoResize">
+        Title="JottyCRM" Height="900" Width="1500"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="Transparent"
+        AllowsTransparency="True">
     
     <Grid>
         <Grid.Resources>
@@ -26,7 +31,38 @@
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <view:HomeView />
             </DataTemplate>
-        </Grid.Resources>    
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        </Grid.Resources>   
+        
+        <Border CornerRadius="50"
+                BorderThickness="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"></GradientStop>
+                    <GradientStop Color="#DA43AE" Offset="0.75"></GradientStop>
+                    <GradientStop Color="#8A16C1" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"></GradientStop>
+                    <GradientStop Color="#1B1448" Offset="0.75"></GradientStop>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+ 
+        <StackPanel>
+            <Image Margin="0 20 40 0" 
+                   Source="{StaticResource CloseIconWhite}" 
+                   Height="20" 
+                   Opacity="0.6" 
+                   HorizontalAlignment="Right"
+                   Cursor="Hand">
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding CloseWindowCommand}"></MouseBinding>
+                </Image.InputBindings>
+            </Image>
+            <ContentControl Content="{Binding CurrentViewModel}" Margin="0 20 0 0" />
+        </StackPanel>
     </Grid>
 </Window>
