@@ -63,11 +63,11 @@ namespace JottyCRM.ViewModel
             RegisterCommand = new RegisterCommand(this, userService, userStore, homeNavigationService);
             CloseWindowCommand = new CloseWindowCommand(this, closeNavigationService);
             
-            var loginWindow = new RegistrationView()
+            var registrationWindow = new RegistrationView()
             {
                 DataContext = this
             };
-            loginWindow.ShowDialog();
+            registrationWindow.ShowDialog();
         }
     }
 }

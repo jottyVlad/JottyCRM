@@ -235,14 +235,34 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CloseWindowCommand.cs" />
+    <Compile Include="Commands\CreateContractorCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegisterCommand.cs" />
+    <Compile Include="DatabaseContext\ContractorContext\ContractorManagementDbContext.cs" />
+    <Compile Include="DatabaseContext\ApplicationDatabaseContext.cs" />
+    <Compile Include="Migrations\202405180830177_AddedTables.cs" />
+    <Compile Include="Migrations\202405180830177_AddedTables.Designer.cs">
+      <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Contractor\Contractor.cs" />
+    <Compile Include="Models\Contractor\UserPropertyContractor.cs" />
+    <Compile Include="Models\Contractor\UserPropertyContractorValueToBase.cs" />
+    <Compile Include="Models\Lead\Lead.cs" />
+    <Compile Include="Models\Lead\UserPropertyLeadValueToBase.cs" />
+    <Compile Include="Models\Lead\UserPropertyLead.cs" />
+    <Compile Include="Models\Sell\Sell.cs" />
+    <Compile Include="Models\Sell\UserPropertySell.cs" />
+    <Compile Include="Models\Sell\UserPropertySellValueToBase.cs" />
+    <Compile Include="Repositories\Contractor.cs" />
     <Compile Include="Services\CloseWindowNavigationService.cs" />
     <Compile Include="Services\CompositeNavigationService.cs" />
+    <Compile Include="Services\ContractorService.cs" />
     <Compile Include="Services\WithNavbarNavigationService.cs" />
     <Compile Include="Services\WindowNavigationService.cs" />
+    <Compile Include="Stores\ContractorsStore.cs" />
     <Compile Include="Stores\UserStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="DatabaseContext\UserContext\UserFluentMap.cs" />
@@ -252,6 +272,8 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Stores\WindowNavigationStore.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ContractorsViewModel.cs" />
+    <Compile Include="ViewModel\CreateContractorViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\BaseWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -260,6 +282,18 @@
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="ViewModel\WithNavbarViewModel.cs" />
+    <Compile Include="View\Components\Layout.xaml.cs">
+      <DependentUpon>Layout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\NavBar.xaml.cs">
+      <DependentUpon>NavBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContractorsView.xaml.cs">
+      <DependentUpon>ContractorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateContractorView.xaml.cs">
+      <DependentUpon>CreateContractorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -280,6 +314,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Components\Layout.xaml" />
+    <Page Include="View\Components\NavBar.xaml" />
+    <Page Include="View\ContractorsView.xaml" />
+    <Page Include="View\CreateContractorView.xaml" />
     <Page Include="View\HomeView.xaml" />
     <Page Include="View\LoginView.xaml" />
     <Page Include="View\MainWindow.xaml">
@@ -304,6 +342,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202405180830177_AddedTables.resx">
+      <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -336,6 +377,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\closeBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatabaseContext\LeadContext\" />
+    <Folder Include="DatabaseContext\SellContext\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

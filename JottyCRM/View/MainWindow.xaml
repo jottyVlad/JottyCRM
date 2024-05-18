@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:JottyCRM.View"
+        xmlns:components="clr-namespace:JottyCRM.View.Components"
         xmlns:local="clr-namespace:JottyCRM.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="JottyCRM.View.MainWindow"
         mc:Ignorable="d"
@@ -20,16 +21,25 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewModels:WelcomeViewModel}">
-                <view:WelcomeView />
+                <views:WelcomeView />
             </DataTemplate>    
-            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <view:LoginView />
-            </DataTemplate>
+            <!--<DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <views:LoginView />
+            </DataTemplate>-->
             <DataTemplate DataType="{x:Type viewModels:RegistrationViewModel}">
-                <view:RegistrationView />
+                <views:RegistrationView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
-                <view:HomeView />
+                <views:HomeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ContractorsViewModel}">
+                <views:ContractorsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:WithNavbarViewModel}">
+                <components:Layout />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CreateContractorViewModel}">
+                <views:CreateContractorView />
             </DataTemplate>
         </Grid.Resources>   
         
@@ -62,7 +72,7 @@
                     <MouseBinding Gesture="LeftClick" Command="{Binding CloseWindowCommand}"></MouseBinding>
                 </Image.InputBindings>
             </Image>
-            <ContentControl Content="{Binding CurrentViewModel}" Margin="0 20 0 0" />
         </StackPanel>
+        <ContentControl Content="{Binding CurrentViewModel}" Margin="0 20 0 0" />
     </Grid>
 </Window>

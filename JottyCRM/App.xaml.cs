@@ -11,6 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using JottyCRM.Core;
+using JottyCRM.DatabaseContext;
+using JottyCRM.DatabaseContext.ContractorContext;
+using JottyCRM.Models;
 using JottyCRM.repositories;
 using JottyCRM.Services;
 using JottyCRM.Stores;
@@ -33,6 +36,7 @@ namespace JottyCRM
 
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<UserStore>();
+            services.AddSingleton<ContractorsStore>();
             services.AddSingleton<WindowNavigationStore>();
             
             services.AddSingleton<AmbientDbContextLocator>();
@@ -42,6 +46,12 @@ namespace JottyCRM
             services.AddSingleton<IUserService>(s => new UserService(
                 s.GetRequiredService<DbContextScopeFactory>(),
                 s.GetRequiredService<IUserRepository>()
+            ));
+            
+            services.AddSingleton<IContractorRepository>(s => new ContractorRepository(s.GetRequiredService<AmbientDbContextLocator>()));
+            services.AddSingleton<IContractorService>(s => new ContractorService(
+                s.GetRequiredService<DbContextScopeFactory>(),
+                s.GetRequiredService<IContractorRepository>()
             ));
             
             services.AddSingleton<CloseWindowNavigationService>();
@@ -56,8 +66,17 @@ namespace JottyCRM
 
             services.AddTransient<RegistrationViewModel>(CreateRegistrationViewModel);
 
+            services.AddTransient<CreateContractorViewModel>(CreateCreateContractorViewModel);
+
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(
                 s.GetRequiredService<UserStore>()));
+
+            services.AddTransient<ContractorsViewModel>(s => new ContractorsViewModel(
+                s.GetRequiredService<IContractorService>(),
+                s.GetRequiredService<UserStore>(),
+                s.GetRequiredService<ContractorsStore>(),
+                CreateCreateContractorNavigationService(s)));
+            services.AddTransient<NavbarViewModel>(CreateNavbarViewModel);
 
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>(s => new MainWindow()
@@ -101,6 +120,28 @@ namespace JottyCRM
                 );
         }
 
+        private INavigationService CreateCreateContractorNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WindowNavigationService<CreateContractorViewModel>(
+                serviceProvider.GetRequiredService<WindowNavigationStore>(),
+                serviceProvider.GetRequiredService<CreateContractorViewModel>);
+        }
+
+        private CreateContractorViewModel CreateCreateContractorViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService createContractorNavigationService = new CompositeNavigationService(
+                serviceProvider.GetRequiredService<CloseWindowNavigationService>(),
+                CreateContractorsNavigationService(serviceProvider));
+
+            CloseWindowNavigationService closeNavigationService = new CloseWindowNavigationService(
+                serviceProvider.GetRequiredService<WindowNavigationStore>());
+
+            return new CreateContractorViewModel(serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<IContractorService>(),
+                createContractorNavigationService,
+                closeNavigationService);
+        }
+
         private INavigationService CreateRegistrationNavigationService(IServiceProvider serviceProvider)
         {
             return new WindowNavigationService<RegistrationViewModel>(
@@ -128,14 +169,43 @@ namespace JottyCRM
 
         private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<HomeViewModel>(
+            return new WithNavbarNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                serviceProvider.GetRequiredService<HomeViewModel>
+                serviceProvider.GetRequiredService<HomeViewModel>,
+                serviceProvider.GetRequiredService<NavbarViewModel>
             );
+        }
+
+        private INavigationService CreateContractorsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WithNavbarNavigationService<ContractorsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ContractorsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavbarViewModel>()
+                );
+        }
+
+        private NavbarViewModel CreateNavbarViewModel(IServiceProvider serviceProvider)
+        {
+            return new NavbarViewModel(null,
+                CreateContractorsNavigationService(serviceProvider),
+                null,
+                null
+            );
+        }
+
+        private void CreateDatabaseTables()
+        {
+            using (var ctx = new ApplicationDatabaseContext())
+            {
+                ctx.Database.CreateIfNotExists();
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            CreateDatabaseTables();
+            
             INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
             initialNavigationService.Navigate();
 
