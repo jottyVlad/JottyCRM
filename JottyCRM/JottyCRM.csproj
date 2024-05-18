@@ -236,15 +236,25 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CloseWindowCommand.cs" />
     <Compile Include="Commands\CreateContractorCommand.cs" />
+    <Compile Include="Commands\CreateLeadCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegisterCommand.cs" />
     <Compile Include="DatabaseContext\ContractorContext\ContractorManagementDbContext.cs" />
     <Compile Include="DatabaseContext\ApplicationDatabaseContext.cs" />
+    <Compile Include="DatabaseContext\LeadContext\LeadManagementDbContext.cs" />
     <Compile Include="Migrations\202405180830177_AddedTables.cs" />
     <Compile Include="Migrations\202405180830177_AddedTables.Designer.cs">
       <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405181842287_CreateLeads.cs" />
+    <Compile Include="Migrations\202405181842287_CreateLeads.Designer.cs">
+      <DependentUpon>202405181842287_CreateLeads.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405181910488_todatetime2.cs" />
+    <Compile Include="Migrations\202405181910488_todatetime2.Designer.cs">
+      <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contractor\Contractor.cs" />
@@ -257,12 +267,15 @@
     <Compile Include="Models\Sell\UserPropertySell.cs" />
     <Compile Include="Models\Sell\UserPropertySellValueToBase.cs" />
     <Compile Include="Repositories\Contractor.cs" />
+    <Compile Include="Repositories\Lead.cs" />
     <Compile Include="Services\CloseWindowNavigationService.cs" />
     <Compile Include="Services\CompositeNavigationService.cs" />
     <Compile Include="Services\ContractorService.cs" />
+    <Compile Include="Services\LeadService.cs" />
     <Compile Include="Services\WithNavbarNavigationService.cs" />
     <Compile Include="Services\WindowNavigationService.cs" />
     <Compile Include="Stores\ContractorsStore.cs" />
+    <Compile Include="Stores\LeadsStore.cs" />
     <Compile Include="Stores\UserStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="DatabaseContext\UserContext\UserFluentMap.cs" />
@@ -274,8 +287,10 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ContractorsViewModel.cs" />
     <Compile Include="ViewModel\CreateContractorViewModel.cs" />
+    <Compile Include="ViewModel\CreateLeadViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\BaseWindowViewModel.cs" />
+    <Compile Include="ViewModel\LeadsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavbarViewModel.cs" />
@@ -294,8 +309,14 @@
     <Compile Include="View\CreateContractorView.xaml.cs">
       <DependentUpon>CreateContractorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CreateLeadView.xaml.cs">
+      <DependentUpon>CreateLeadView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LeadsView.xaml.cs">
+      <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -318,7 +339,9 @@
     <Page Include="View\Components\NavBar.xaml" />
     <Page Include="View\ContractorsView.xaml" />
     <Page Include="View\CreateContractorView.xaml" />
+    <Page Include="View\CreateLeadView.xaml" />
     <Page Include="View\HomeView.xaml" />
+    <Page Include="View\LeadsView.xaml" />
     <Page Include="View\LoginView.xaml" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -344,6 +367,12 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202405180830177_AddedTables.resx">
       <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405181842287_CreateLeads.resx">
+      <DependentUpon>202405181842287_CreateLeads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405181910488_todatetime2.resx">
+      <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -379,7 +408,6 @@
     <Resource Include="Images\closeBlack.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DatabaseContext\LeadContext\" />
     <Folder Include="DatabaseContext\SellContext\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

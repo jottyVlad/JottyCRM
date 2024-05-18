@@ -35,11 +35,17 @@
             <DataTemplate DataType="{x:Type viewModels:ContractorsViewModel}">
                 <views:ContractorsView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:LeadsViewModel}">
+                <views:LeadsView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:WithNavbarViewModel}">
                 <components:Layout />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:CreateContractorViewModel}">
                 <views:CreateContractorView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:CreateLeadViewModel}">
+                <views:CreateLeadView />
             </DataTemplate>
         </Grid.Resources>   
         

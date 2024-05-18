@@ -3,9 +3,9 @@ using JottyCRM.ViewModel;
 
 namespace JottyCRM.View
 {
-    public partial class ContractorsView : UserControl
+    public partial class LeadsView : UserControl
     {
-        public ContractorsView()
+        public LeadsView()
         {
             InitializeComponent();
         }
