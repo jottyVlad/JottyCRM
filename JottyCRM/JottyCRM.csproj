@@ -237,6 +237,7 @@
     <Compile Include="Commands\CloseWindowCommand.cs" />
     <Compile Include="Commands\CreateContractorCommand.cs" />
     <Compile Include="Commands\CreateLeadCommand.cs" />
+    <Compile Include="Commands\CreateSellCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="DatabaseContext\ContractorContext\ContractorManagementDbContext.cs" />
     <Compile Include="DatabaseContext\ApplicationDatabaseContext.cs" />
     <Compile Include="DatabaseContext\LeadContext\LeadManagementDbContext.cs" />
+    <Compile Include="DatabaseContext\SellContext\SellManagementDbContext.cs" />
     <Compile Include="Migrations\202405180830177_AddedTables.cs" />
     <Compile Include="Migrations\202405180830177_AddedTables.Designer.cs">
       <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
@@ -255,6 +257,10 @@
     <Compile Include="Migrations\202405181910488_todatetime2.cs" />
     <Compile Include="Migrations\202405181910488_todatetime2.Designer.cs">
       <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405191015486_AddedAmountOfTransaction.cs" />
+    <Compile Include="Migrations\202405191015486_AddedAmountOfTransaction.Designer.cs">
+      <DependentUpon>202405191015486_AddedAmountOfTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contractor\Contractor.cs" />
@@ -268,14 +274,17 @@
     <Compile Include="Models\Sell\UserPropertySellValueToBase.cs" />
     <Compile Include="Repositories\Contractor.cs" />
     <Compile Include="Repositories\Lead.cs" />
+    <Compile Include="Repositories\Sell.cs" />
     <Compile Include="Services\CloseWindowNavigationService.cs" />
     <Compile Include="Services\CompositeNavigationService.cs" />
     <Compile Include="Services\ContractorService.cs" />
     <Compile Include="Services\LeadService.cs" />
+    <Compile Include="Services\SellService.cs" />
     <Compile Include="Services\WithNavbarNavigationService.cs" />
     <Compile Include="Services\WindowNavigationService.cs" />
     <Compile Include="Stores\ContractorsStore.cs" />
     <Compile Include="Stores\LeadsStore.cs" />
+    <Compile Include="Stores\SellsStore.cs" />
     <Compile Include="Stores\UserStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="DatabaseContext\UserContext\UserFluentMap.cs" />
@@ -288,6 +297,7 @@
     <Compile Include="ViewModel\ContractorsViewModel.cs" />
     <Compile Include="ViewModel\CreateContractorViewModel.cs" />
     <Compile Include="ViewModel\CreateLeadViewModel.cs" />
+    <Compile Include="ViewModel\CreateSellViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\BaseWindowViewModel.cs" />
     <Compile Include="ViewModel\LeadsViewModel.cs" />
@@ -295,6 +305,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavbarViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="ViewModel\SellsViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="ViewModel\WithNavbarViewModel.cs" />
     <Compile Include="View\Components\Layout.xaml.cs">
@@ -312,6 +323,9 @@
     <Compile Include="View\CreateLeadView.xaml.cs">
       <DependentUpon>CreateLeadView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CreateSellView.xaml.cs">
+      <DependentUpon>CreateSellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -328,6 +342,9 @@
     <Compile Include="View\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SellsView.xaml.cs">
+      <DependentUpon>SellsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
@@ -340,6 +357,7 @@
     <Page Include="View\ContractorsView.xaml" />
     <Page Include="View\CreateContractorView.xaml" />
     <Page Include="View\CreateLeadView.xaml" />
+    <Page Include="View\CreateSellView.xaml" />
     <Page Include="View\HomeView.xaml" />
     <Page Include="View\LeadsView.xaml" />
     <Page Include="View\LoginView.xaml" />
@@ -348,6 +366,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\RegistrationView.xaml" />
+    <Page Include="View\SellsView.xaml" />
     <Page Include="View\WelcomeView.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405181910488_todatetime2.resx">
       <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405191015486_AddedAmountOfTransaction.resx">
+      <DependentUpon>202405191015486_AddedAmountOfTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -406,9 +428,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\closeBlack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DatabaseContext\SellContext\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

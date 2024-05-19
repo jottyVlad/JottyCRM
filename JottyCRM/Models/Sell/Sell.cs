@@ -15,5 +15,6 @@ namespace JottyCRM.Models.Sell
         public string Name { get; set; }
         public DateTime SellDateTime { get; set; }
         
+        public Decimal AmountOfTransaction { get; set; }
     }
 }

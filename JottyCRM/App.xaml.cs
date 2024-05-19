@@ -38,6 +38,7 @@ namespace JottyCRM
             services.AddSingleton<UserStore>();
             services.AddSingleton<ContractorsStore>();
             services.AddSingleton<LeadsStore>();
+            services.AddSingleton<SellsStore>();
             services.AddSingleton<WindowNavigationStore>();
             
             services.AddSingleton<AmbientDbContextLocator>();
@@ -60,6 +61,12 @@ namespace JottyCRM
                 s.GetRequiredService<DbContextScopeFactory>(),
                 s.GetRequiredService<ILeadRepository>()
             ));
+
+            services.AddSingleton<ISellRepository>(s =>
+                new SellRepository(s.GetRequiredService<AmbientDbContextLocator>())); 
+            services.AddSingleton<ISellService>(s => new SellService(
+                s.GetRequiredService<DbContextScopeFactory>(),
+                s.GetRequiredService<ISellRepository>()));
             
             services.AddSingleton<CloseWindowNavigationService>();
 
@@ -75,6 +82,8 @@ namespace JottyCRM
 
             services.AddTransient<CreateContractorViewModel>(CreateCreateContractorViewModel);
             services.AddTransient<CreateLeadViewModel>(CreateCreateLeadViewModel);
+            services.AddTransient<CreateSellViewModel>(CreateCreateSellViewModel);
+
 
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(
                 s.GetRequiredService<UserStore>()));
@@ -89,6 +98,11 @@ namespace JottyCRM
                 s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<LeadsStore>(),
                 CreateCreateLeadNavigationService(s)));
+            services.AddTransient<SellsViewModel>(s => new SellsViewModel(
+                s.GetRequiredService<ISellService>(),
+                s.GetRequiredService<UserStore>(),
+                s.GetRequiredService<SellsStore>(),
+                CreateCreateSellNavigationService(s)));
             
             services.AddTransient<NavbarViewModel>(CreateNavbarViewModel);
 
@@ -147,6 +161,13 @@ namespace JottyCRM
                 serviceProvider.GetRequiredService<WindowNavigationStore>(),
                 serviceProvider.GetRequiredService<CreateLeadViewModel>);
         }
+        
+        private INavigationService CreateCreateSellNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WindowNavigationService<CreateSellViewModel>(
+                serviceProvider.GetRequiredService<WindowNavigationStore>(),
+                serviceProvider.GetRequiredService<CreateSellViewModel>);
+        }
 
         private CreateContractorViewModel CreateCreateContractorViewModel(IServiceProvider serviceProvider)
         {
@@ -175,6 +196,21 @@ namespace JottyCRM
             return new CreateLeadViewModel(serviceProvider.GetRequiredService<UserStore>(),
                 serviceProvider.GetRequiredService<ILeadService>(),
                 createLeadNavigationService,
+                closeNavigationService);
+        }
+        
+        private CreateSellViewModel CreateCreateSellViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService createSellNavigationService = new CompositeNavigationService(
+                serviceProvider.GetRequiredService<CloseWindowNavigationService>(),
+                CreateSellsNavigationService(serviceProvider));
+
+            CloseWindowNavigationService closeNavigationService = new CloseWindowNavigationService(
+                serviceProvider.GetRequiredService<WindowNavigationStore>());
+
+            return new CreateSellViewModel(serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<ISellService>(),
+                createSellNavigationService,
                 closeNavigationService);
         }
         
@@ -229,13 +265,22 @@ namespace JottyCRM
                 () => serviceProvider.GetRequiredService<NavbarViewModel>()
             );
         }
+        
+        private INavigationService CreateSellsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WithNavbarNavigationService<SellsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<SellsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavbarViewModel>()
+            );
+        }
 
         private NavbarViewModel CreateNavbarViewModel(IServiceProvider serviceProvider)
         {
             return new NavbarViewModel(null,
                 CreateContractorsNavigationService(serviceProvider),
                 CreateLeadsNavigationService(serviceProvider),
-                null
+                CreateSellsNavigationService(serviceProvider)
             );
         }
 
