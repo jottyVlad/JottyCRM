@@ -63,6 +63,7 @@ namespace JottyCRM.ViewModel
             CloseWindowNavigationService closeWindowNavigationService
             )
         {
+            CreatedAt = DateTime.Now.Date;
             CreateLeadCommand = new CreateLeadCommand(this,
                 userStore, navigationService, leadService);
             CloseWindowCommand = new CloseWindowCommand(this, closeWindowNavigationService);
