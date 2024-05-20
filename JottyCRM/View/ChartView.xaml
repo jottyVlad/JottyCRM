@@ -1,0 +1,54 @@
+<Window x:Class="JottyCRM.View.ChartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:JottyCRM.View"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        xmlns:wf="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+        mc:Ignorable="d"
+        Title="ChartWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <WindowsFormsHost>
+                <wf:Chart x:Name="Chart">
+                    <wf:Chart.Series>
+                        <wf:Series ChartType="Line"></wf:Series>
+                    </wf:Chart.Series>
+                    <wf:Chart.ChartAreas>
+                        <wf:ChartArea />
+                    </wf:Chart.ChartAreas>
+                </wf:Chart>
+            </WindowsFormsHost>
+            <!--<dxc:ChartControl Name="chartControl1">
+                <dxc:ChartControl.Diagram>
+                    <dxc:XYDiagram2D>
+                        <dxc:XYDiagram2D.Series>
+                            <dxc:LineSeries2D DisplayName="{Binding DisplayName}" 
+                                              DataSource="{Binding DataPoints}" 
+                                              ArgumentScaleType="DateTime"
+                                              ArgumentDataMember="Date"
+                                              ValueDataMember="Value"
+                                              LabelsVisibility="True"
+                                              
+                                              MarkerSize="14" 
+                                              MarkerVisible="True">
+                                <dxc:LineSeries2D.MarkerModel>
+                                    <dxc:RingMarker2DModel/>
+                                </dxc:LineSeries2D.MarkerModel>
+                                <dxc:LineSeries2D.Label>
+                                    <dxc:SeriesLabel TextPattern="{}{V:f1}" 
+                                                     dxc:MarkerSeries2D.Angle="90" 
+                                                     ConnectorVisible="False"/>
+                                </dxc:LineSeries2D.Label>
+                            </dxc:LineSeries2D>
+                        </dxc:XYDiagram2D.Series>
+                    </dxc:XYDiagram2D>
+                </dxc:ChartControl.Diagram>
+                ~1~<dxc:ChartControl.Legend>
+                    <dxc:Legend HorizontalPosition="Left"/>
+                </dxc:ChartControl.Legend>@1@
+            </dxc:ChartControl>-->
+        </Grid>
+    </Grid>
+</Window>

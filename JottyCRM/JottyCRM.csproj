@@ -215,6 +215,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -227,6 +228,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -235,6 +237,10 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CloseWindowCommand.cs" />
+    <Compile Include="Commands\CommandsUtils.cs" />
+    <Compile Include="Commands\CreateChartCountOfLeadsCommand.cs" />
+    <Compile Include="Commands\CreateChartCountOfSellsCommand.cs" />
+    <Compile Include="Commands\CreateChartRevenueSellsCommand.cs" />
     <Compile Include="Commands\CreateContractorCommand.cs" />
     <Compile Include="Commands\CreateLeadCommand.cs" />
     <Compile Include="Commands\CreateSellCommand.cs" />
@@ -293,7 +299,9 @@
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Stores\WindowNavigationStore.cs" />
+    <Compile Include="ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\ContractorsViewModel.cs" />
     <Compile Include="ViewModel\CreateContractorViewModel.cs" />
     <Compile Include="ViewModel\CreateLeadViewModel.cs" />
@@ -308,6 +316,12 @@
     <Compile Include="ViewModel\SellsViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="ViewModel\WithNavbarViewModel.cs" />
+    <Compile Include="View\AnalyticsView.xaml.cs">
+      <DependentUpon>AnalyticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Components\Layout.xaml.cs">
       <DependentUpon>Layout.xaml</DependentUpon>
     </Compile>
@@ -352,6 +366,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AnalyticsView.xaml" />
+    <Page Include="View\ChartView.xaml" />
     <Page Include="View\Components\Layout.xaml" />
     <Page Include="View\Components\NavBar.xaml" />
     <Page Include="View\ContractorsView.xaml" />

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using JottyCRM.ViewModel;
 
 namespace JottyCRM.View
 {
@@ -16,6 +17,9 @@ namespace JottyCRM.View
         {
             base.OnMouseLeftButtonDown(e);
             DragMove();
+
+            var dataContext = this.DataContext as CreateSellViewModel; // TODO: delete it
+            var k = 1;
         }
 
         private void AmountOfTransactionTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -29,6 +33,7 @@ namespace JottyCRM.View
             }
 
             if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
-                e.Handled = true;        }
+                e.Handled = true;        
+        }
     }
 }

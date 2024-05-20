@@ -11,6 +11,8 @@ namespace JottyCRM.Services
     {
         Sell Create(string name, int contractorId, DateTime sellDateTime, Decimal amountOfTransaction, User user);
         List<Sell> GetAll(int userId);
+        int GetCountOfSellsOnDate(DateTime dateTime, int userId);
+        Decimal GetRevenueOnDate(DateTime dateTime, int userId);
     }
     
     public class SellService : ISellService
@@ -49,9 +51,25 @@ namespace JottyCRM.Services
 
         public List<Sell> GetAll(int userId)
         {
-            using (var ctx = _dbContextScopeFactory.Create())
+            using (var _ = _dbContextScopeFactory.Create())
             {
                 return _repository.GetAll(userId);
+            }
+        }
+
+        public int GetCountOfSellsOnDate(DateTime dateTime, int userId)
+        {
+            using (var _ = _dbContextScopeFactory.Create())
+            {
+                return _repository.GetCountOfSellsOnDate(dateTime, userId);
+            }
+        }
+
+        public decimal GetRevenueOnDate(DateTime dateTime, int userId)
+        {
+            using (var _ = _dbContextScopeFactory.Create())
+            {
+                return _repository.GetRevenueOnDate(dateTime, userId);
             }
         }
     }

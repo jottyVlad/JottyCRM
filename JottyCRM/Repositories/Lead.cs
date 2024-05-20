@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using JottyCRM.DatabaseContext.ContractorContext;
 using JottyCRM.DatabaseContext.LeadContext;
@@ -13,6 +14,7 @@ namespace JottyCRM.repositories
         Lead CreateLead(Lead lead);
         List<Lead> GetLeadsByName(string leadName, int userId);
         List<Lead> GetAll(int userId);
+        int GetCountOfLeadsOnDate(DateTime dateTime, int userId);
     }
     
     public class LeadRepository : ILeadRepository
@@ -42,6 +44,12 @@ namespace JottyCRM.repositories
         public List<Lead> GetAll(int userId)
         {
             return DbContext.Leads.Where(s => s.UserId == userId).ToList();
+        }
+
+        public int GetCountOfLeadsOnDate(DateTime dateTime, int userId)
+        {
+            int count = DbContext.Leads.Count(s => DbFunctions.TruncateTime(s.CreatedAt) == dateTime.Date && s.UserId == userId);
+            return count;
         }
 
         public List<Lead> GetLeadsByName(string leadName, int userId)

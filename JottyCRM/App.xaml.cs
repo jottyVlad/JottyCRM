@@ -104,6 +104,12 @@ namespace JottyCRM
                 s.GetRequiredService<SellsStore>(),
                 CreateCreateSellNavigationService(s)));
             
+            services.AddTransient<AnalyticsViewModel>(s => new AnalyticsViewModel(
+                s.GetRequiredService<UserStore>(),
+                s.GetRequiredService<ILeadService>(),
+                s.GetRequiredService<ISellService>()
+                ));
+            
             services.AddTransient<NavbarViewModel>(CreateNavbarViewModel);
 
             services.AddSingleton<MainViewModel>();
@@ -275,12 +281,21 @@ namespace JottyCRM
             );
         }
 
+        private INavigationService CreateAnalyticsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WithNavbarNavigationService<AnalyticsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<AnalyticsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavbarViewModel>());
+        }
+
         private NavbarViewModel CreateNavbarViewModel(IServiceProvider serviceProvider)
         {
             return new NavbarViewModel(null,
                 CreateContractorsNavigationService(serviceProvider),
                 CreateLeadsNavigationService(serviceProvider),
-                CreateSellsNavigationService(serviceProvider)
+                CreateSellsNavigationService(serviceProvider),
+                CreateAnalyticsNavigationService(serviceProvider)
             );
         }
 

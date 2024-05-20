@@ -6,6 +6,10 @@ using JottyCRM.DatabaseContext.SellContext;
 using JottyCRM.Models.Contractor;
 using JottyCRM.Models.Sell;
 using Mehdime.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Data.Entity;
+using DbFunctions = System.Data.Entity.DbFunctions;
 
 namespace JottyCRM.repositories
 {
@@ -14,6 +18,8 @@ namespace JottyCRM.repositories
         Sell CreateSell(Sell sell);
         List<Sell> GetSellsByName(string name, int userId);
         List<Sell> GetAll(int userId);
+        int GetCountOfSellsOnDate(DateTime dateTime, int userId);
+        Decimal GetRevenueOnDate(DateTime dateTime, int userId);
     }
     
     public class SellRepository : ISellRepository
@@ -44,7 +50,19 @@ namespace JottyCRM.repositories
         {
             return DbContext.Sells.Where(s => s.UserId == userId).ToList();
         }
-        
+
+        public int GetCountOfSellsOnDate(DateTime dateTime, int userId)
+        {
+            return DbContext.Sells.Count(s => DbFunctions.TruncateTime(s.SellDateTime) == dateTime.Date && s.UserId == userId);
+        }
+
+        public Decimal GetRevenueOnDate(DateTime dateTime, int userId)
+        {
+            var sells = DbContext.Sells.Where(s =>
+                DbFunctions.TruncateTime(s.SellDateTime) == dateTime.Date && s.UserId == userId).ToList();
+            return sells.Count == 0 ? 0 : sells.Sum(s => s.AmountOfTransaction);
+        }
+
         public Sell CreateSell(Sell sell)
         {
             try
