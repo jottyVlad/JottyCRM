@@ -42,7 +42,7 @@ namespace JottyCRM.Services
 
         public async Task<UserAuthorized> TryAuthorize(string login, string password)
         {
-            if (String.IsNullOrEmpty(login))
+            if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(password))
             {
                 return new UserAuthorized(null, false);
             }
