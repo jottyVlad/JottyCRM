@@ -16,6 +16,9 @@ namespace JottyCRM.ViewModel
         private readonly ContractorsStore _contractorsStore;
         public List<Contractor> ContractorsList => _contractorService.GetAll(_userStore.CurrentUser.Id);
 
+        public List<UserPropertyContractor> UserProperties =>
+            _contractorService.GetUserProperties(_userStore.CurrentUser.Id);
+
         public ICommand NavigateToCreateContractorCommand { get; }
 
         public ContractorsViewModel(IContractorService contractorService, 

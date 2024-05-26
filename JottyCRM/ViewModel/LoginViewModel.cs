@@ -80,7 +80,5 @@ namespace JottyCRM.ViewModel
             };
             loginWindow.ShowDialog();
         }
-        
-        
     }
 }

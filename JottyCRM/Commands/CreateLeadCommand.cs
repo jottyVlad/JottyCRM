@@ -1,5 +1,6 @@
 using JottyCRM.Core;
 using JottyCRM.Services;
+using JottyCRM.Stores;
 using JottyCRM.ViewModel;
 
 namespace JottyCRM.Commands
@@ -9,17 +10,17 @@ namespace JottyCRM.Commands
         private readonly CreateLeadViewModel _createLeadViewModel;
         private readonly UserStore _userStore;
         private readonly INavigationService _navigationService;
-        private readonly ILeadService _leadService;
+        private readonly LeadsStore _leadsStore;
 
         public CreateLeadCommand(CreateLeadViewModel createLeadViewModel,
             UserStore userStore,
             INavigationService navigationService,
-            ILeadService leadService)
+            LeadsStore leadsStore)
         {
             _createLeadViewModel = createLeadViewModel;
             _userStore = userStore;
             _navigationService = navigationService;
-            _leadService = leadService;
+            _leadsStore = leadsStore;
         }
         
         public override void Execute(object parameter)
@@ -29,9 +30,12 @@ namespace JottyCRM.Commands
                 return;
             }
 
-            _leadService.Create(_createLeadViewModel.Name,
+            _leadsStore.CreateLead(_createLeadViewModel.Name,
                 _createLeadViewModel.Status, _createLeadViewModel.Description,
-                _createLeadViewModel.CreatedAt, _userStore.CurrentUser);
+                _createLeadViewModel.CreatedAt);
+            /*_leadService.Create(_createLeadViewModel.Name,
+                _createLeadViewModel.Status, _createLeadViewModel.Description,
+                _createLeadViewModel.CreatedAt, _userStore.CurrentUser);*/
             _navigationService.Navigate();
         }
     }

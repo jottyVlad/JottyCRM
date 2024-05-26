@@ -1,19 +1,8 @@
-﻿using JottyCRM.View;
-using Microsoft.Extensions.DependencyInjection;
-using ReactiveUI;
-using Splat;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using JottyCRM.Core;
 using JottyCRM.DatabaseContext;
-using JottyCRM.DatabaseContext.ContractorContext;
-using JottyCRM.Models;
 using JottyCRM.repositories;
 using JottyCRM.Services;
 using JottyCRM.Stores;
@@ -83,6 +72,8 @@ namespace JottyCRM
             services.AddTransient<CreateContractorViewModel>(CreateCreateContractorViewModel);
             services.AddTransient<CreateLeadViewModel>(CreateCreateLeadViewModel);
             services.AddTransient<CreateSellViewModel>(CreateCreateSellViewModel);
+            services.AddTransient<ProfileViewModel>(CreateProfileViewModel);
+            services.AddTransient<ChangePasswordViewModel>(CreateChangePasswordViewModel);
 
 
             services.AddTransient<HomeViewModel>(s => new HomeViewModel(
@@ -109,6 +100,11 @@ namespace JottyCRM
                 s.GetRequiredService<ILeadService>(),
                 s.GetRequiredService<ISellService>()
                 ));
+            
+            services.AddTransient<ProfileViewModel>(s => new ProfileViewModel(
+                s.GetRequiredService<UserStore>(),
+                CreateChangePasswordNavigationService(s)
+            ));
             
             services.AddTransient<NavbarViewModel>(CreateNavbarViewModel);
 
@@ -154,6 +150,13 @@ namespace JottyCRM
                 );
         }
 
+        private INavigationService CreateChangePasswordNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WindowNavigationService<ChangePasswordViewModel>(
+                serviceProvider.GetRequiredService<WindowNavigationStore>(),
+                serviceProvider.GetRequiredService<ChangePasswordViewModel>);
+        }
+            
         private INavigationService CreateCreateContractorNavigationService(IServiceProvider serviceProvider)
         {
             return new WindowNavigationService<CreateContractorViewModel>(
@@ -200,8 +203,29 @@ namespace JottyCRM
                 serviceProvider.GetRequiredService<WindowNavigationStore>());
 
             return new CreateLeadViewModel(serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<ILeadService>(),
+                serviceProvider.GetRequiredService<LeadsStore>(),
                 createLeadNavigationService,
+                closeNavigationService);
+        }
+
+        private ProfileViewModel CreateProfileViewModel(IServiceProvider serviceProvider)
+        {
+            return new ProfileViewModel(serviceProvider.GetRequiredService<UserStore>(),
+                CreateChangePasswordNavigationService(serviceProvider));
+        }
+
+        private ChangePasswordViewModel CreateChangePasswordViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService changePasswordNavigationService = new CompositeNavigationService(
+                serviceProvider.GetRequiredService<CloseWindowNavigationService>(),
+                CreateProfileNavigationService(serviceProvider));
+
+            CloseWindowNavigationService closeNavigationService = new CloseWindowNavigationService(
+                serviceProvider.GetRequiredService<WindowNavigationStore>());
+
+            return new ChangePasswordViewModel(serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<IUserService>(),
+                changePasswordNavigationService,
                 closeNavigationService);
         }
         
@@ -289,9 +313,17 @@ namespace JottyCRM
                 () => serviceProvider.GetRequiredService<NavbarViewModel>());
         }
 
+        private INavigationService CreateProfileNavigationService(IServiceProvider serviceProvider)
+        {
+            return new WithNavbarNavigationService<ProfileViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ProfileViewModel>(),
+                () => serviceProvider.GetRequiredService<NavbarViewModel>());
+        }
+
         private NavbarViewModel CreateNavbarViewModel(IServiceProvider serviceProvider)
         {
-            return new NavbarViewModel(null,
+            return new NavbarViewModel(CreateProfileNavigationService(serviceProvider),
                 CreateContractorsNavigationService(serviceProvider),
                 CreateLeadsNavigationService(serviceProvider),
                 CreateSellsNavigationService(serviceProvider),

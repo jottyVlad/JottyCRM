@@ -8,6 +8,9 @@ namespace JottyCRM.View
         public ContractorsView()
         {
             InitializeComponent();
+
+            var _viewModel = this.DataContext as ContractorsViewModel;
+            
         }
     }
 }

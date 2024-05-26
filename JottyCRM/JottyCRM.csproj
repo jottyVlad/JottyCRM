@@ -236,6 +236,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\ChangePasswordCommand.cs" />
     <Compile Include="Commands\CloseWindowCommand.cs" />
     <Compile Include="Commands\CommandsUtils.cs" />
     <Compile Include="Commands\CreateChartCountOfLeadsCommand.cs" />
@@ -301,6 +302,7 @@
     <Compile Include="Stores\WindowNavigationStore.cs" />
     <Compile Include="ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\ChartViewModel.cs" />
     <Compile Include="ViewModel\ContractorsViewModel.cs" />
     <Compile Include="ViewModel\CreateContractorViewModel.cs" />
@@ -312,12 +314,16 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavbarViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\SellsViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Compile Include="ViewModel\WithNavbarViewModel.cs" />
     <Compile Include="View\AnalyticsView.xaml.cs">
       <DependentUpon>AnalyticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChartView.xaml.cs">
       <DependentUpon>ChartView.xaml</DependentUpon>
@@ -353,6 +359,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
@@ -367,6 +376,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AnalyticsView.xaml" />
+    <Page Include="View\ChangePasswordView.xaml" />
     <Page Include="View\ChartView.xaml" />
     <Page Include="View\Components\Layout.xaml" />
     <Page Include="View\Components\NavBar.xaml" />
@@ -381,6 +391,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ProfileView.xaml" />
     <Page Include="View\RegistrationView.xaml" />
     <Page Include="View\SellsView.xaml" />
     <Page Include="View\WelcomeView.xaml" />
@@ -416,7 +427,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\Klukva.otf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

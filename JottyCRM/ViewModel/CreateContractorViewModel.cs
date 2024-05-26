@@ -42,11 +42,6 @@ namespace JottyCRM.ViewModel
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
-
-        /*private readonly UserStore _userStore;
-        private readonly INavigationService _navigationService;
-        private readonly IContractorService _contractorService;*/
-        
         public ICommand CreateContractorCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
 

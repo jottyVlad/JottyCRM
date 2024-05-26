@@ -7,7 +7,9 @@ namespace JottyCRM.DatabaseContext.ContractorContext
 {
     public class ContractorManagementDbContext : DbContext
     {
-        public System.Data.Entity.DbSet<Contractor> Contractors { get; set; }
+        public DbSet<Contractor> Contractors { get; set; }
+        public DbSet<UserPropertyContractor> UserProperties { get; set; }
+        public DbSet<UserPropertyContractorValueToBase> UserPropertyValues { get; set; }
 
         public ContractorManagementDbContext() : base("DBConnection") { }
 

@@ -1,0 +1,55 @@
+<UserControl x:Class="JottyCRM.View.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:JottyCRM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="900">
+    <Grid Width="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <TextBlock TextAlignment="Center" FontSize="20" Foreground="Beige">Профиль</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock 
+                FontSize="17" 
+                Foreground="Beige"
+                VerticalAlignment="Top"
+                Height="30">
+                <Run>Ваше имя: </Run>
+                <Run Text="{Binding Name}"/>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="2">
+            <TextBlock
+                FontSize="17" 
+                Foreground="Beige"
+                VerticalAlignment="Top"
+                Height="30">
+                <Run>Логин: </Run>
+                <Run Text="{Binding Login}"/>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="3">
+            <TextBlock FontSize="17" 
+                       Foreground="Beige">
+                <Run>Email: </Run>
+                <Run Text="{Binding Email}"/>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Button 
+                Width="300"
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateToChangePassword}">Изменить пароль</Button>
+        </Grid>
+    </Grid>
+</UserControl>

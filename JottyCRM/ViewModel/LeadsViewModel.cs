@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using JottyCRM.Commands;
 using JottyCRM.Core;
+using JottyCRM.Models;
 using JottyCRM.Models.Contractor;
 using JottyCRM.Models.Lead;
 using JottyCRM.repositories;

@@ -14,6 +14,7 @@ namespace JottyCRM.repositories
         Contractor CreateContractor(Contractor contractor);
         List<Contractor> GetContractorsByName(string name, int userId);
         List<Contractor> GetAll(int userId);
+        List<UserPropertyContractor> GetUserProperties(int userId);
     }
     
     public class ContractorRepository : IContractorRepository
@@ -44,7 +45,12 @@ namespace JottyCRM.repositories
         {
             return DbContext.Contractors.Where(s => s.UserId == userId).ToList();
         }
-        
+
+        public List<UserPropertyContractor> GetUserProperties(int userId)
+        {
+            return DbContext.UserProperties.Where(s => s.UserTableId == userId).ToList();
+        }
+
         public Contractor CreateContractor(Contractor contractor)
         {
             try

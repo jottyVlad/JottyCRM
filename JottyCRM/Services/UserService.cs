@@ -12,8 +12,11 @@ namespace JottyCRM.Services
 {
     public interface IUserService
     {
-        Task<UserAuthorized> TryAuthorize(string login, string password);
+        UserAuthorized TryAuthorize(string login, string password);
         UserRegistered Create(string name, string login, string email, string password);
+
+        User ChangePassword(User currentUser, string currentPassword, string newPassword,
+            string newPasswordConfirmation);
     }
     public class UserService : IUserService
     {
@@ -40,7 +43,7 @@ namespace JottyCRM.Services
             }
         }
 
-        public async Task<UserAuthorized> TryAuthorize(string login, string password)
+        public UserAuthorized TryAuthorize(string login, string password)
         {
             if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(password))
             {
@@ -49,7 +52,7 @@ namespace JottyCRM.Services
 
             User _user;
             using(var dbContextScope = _dbContextScopeFactory.Create()) {
-                _user = await _repository.GetUserByLoginAsync(login);
+                _user = _repository.GetUserByLogin(login);
             }
             if(_user == null)
             {
@@ -95,6 +98,24 @@ namespace JottyCRM.Services
                 _repository.Create(user);
                 dbContextScope.SaveChanges();
                 return new UserRegistered(user, true, "");
+            }
+        }
+
+        public User ChangePassword(User currentUser, string currentPassword, string newPassword, 
+            string newPasswordConfirmation)
+        {
+            if (currentPassword == null)
+                return null;
+            if (sha256_hash(currentPassword) != currentUser.Password)
+                return null;
+            if (newPassword != newPasswordConfirmation || newPassword == null)
+                return null;
+
+            using (var ctx = _dbContextScopeFactory.Create())
+            {
+                var newUser = _repository.ChangePassword(sha256_hash(newPassword), currentUser);
+                ctx.SaveChanges();
+                return newUser;
             }
         }
     }

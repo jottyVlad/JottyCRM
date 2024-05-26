@@ -12,10 +12,11 @@ namespace JottyCRM.repositories
 {
     public interface IUserRepository
     {
-        Task<User> GetUserByLoginAsync(string login);
+        User GetUserByLogin(string login);
         User Create(User user);
         bool IsEmailExists(string email);
         bool IsLoginExists(string login);
+        User ChangePassword(string newPasswordHash, User currentUser);
     }
 
     public class UserRepository : IUserRepository
@@ -42,12 +43,11 @@ namespace JottyCRM.repositories
             _ambientDbContextLocator = ambientDbContextLocator;
         }
 
-        public async Task<User> GetUserByLoginAsync(string login)
+        public User GetUserByLogin(string login)
         {
-            
             try
             {
-                User _user = await DbContext.Users.FirstAsync(predicate: (user) => user.Login == login);
+                User _user = DbContext.Users.First(predicate: (user) => user.Login == login);
                 return _user;
             }
             catch
@@ -58,6 +58,13 @@ namespace JottyCRM.repositories
 
         public bool IsEmailExists(string email) => DbContext.Users.Any(s => s.Email == email);
         public bool IsLoginExists(string login) => DbContext.Users.Any(s => s.Login == login);
+
+        public User ChangePassword(string newPasswordHash, User currentUser)
+        {
+            var user = GetUserByLogin(currentUser.Login);
+            user.Password = newPasswordHash;
+            return user;
+        }
 
         public User Create(User user)
         {

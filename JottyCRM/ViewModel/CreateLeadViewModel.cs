@@ -3,6 +3,7 @@ using System.Windows.Input;
 using JottyCRM.Commands;
 using JottyCRM.Core;
 using JottyCRM.Services;
+using JottyCRM.Stores;
 using JottyCRM.View;
 
 namespace JottyCRM.ViewModel
@@ -58,14 +59,14 @@ namespace JottyCRM.ViewModel
         public ICommand CloseWindowCommand { get; set; }
 
         public CreateLeadViewModel(UserStore userStore,
-            ILeadService leadService,
+            LeadsStore leadsStore,
             INavigationService navigationService,
             CloseWindowNavigationService closeWindowNavigationService
             )
         {
             CreatedAt = DateTime.Now.Date;
             CreateLeadCommand = new CreateLeadCommand(this,
-                userStore, navigationService, leadService);
+                userStore, navigationService, leadsStore);
             CloseWindowCommand = new CloseWindowCommand(this, closeWindowNavigationService);
             var createLeadWindow = new CreateLeadView()
             {
