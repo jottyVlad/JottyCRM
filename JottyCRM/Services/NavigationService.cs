@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Navigation;
-using JottyCRM.Core;
 using JottyCRM.Stores;
 using JottyCRM.ViewModel;
 

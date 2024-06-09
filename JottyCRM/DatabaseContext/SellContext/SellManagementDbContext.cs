@@ -6,7 +6,7 @@ namespace JottyCRM.DatabaseContext.SellContext
 {
     public class SellManagementDbContext : DbContext
     {
-        public System.Data.Entity.DbSet<Sell> Sells { get; set; }
+        public DbSet<Sell> Sells { get; set; }
 
         public SellManagementDbContext() : base("DBConnection") { }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using JottyCRM.Models;
+﻿using JottyCRM.Models;
 
 namespace JottyCRM.Core
 {

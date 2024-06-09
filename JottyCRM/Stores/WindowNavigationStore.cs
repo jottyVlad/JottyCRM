@@ -1,4 +1,3 @@
-using System;
 using JottyCRM.ViewModel;
 
 namespace JottyCRM.Core

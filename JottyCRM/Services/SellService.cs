@@ -13,6 +13,7 @@ namespace JottyCRM.Services
         List<Sell> GetAll(int userId);
         int GetCountOfSellsOnDate(DateTime dateTime, int userId);
         Decimal GetRevenueOnDate(DateTime dateTime, int userId);
+        void DeleteSell(Sell sell);
     }
     
     public class SellService : ISellService
@@ -70,6 +71,15 @@ namespace JottyCRM.Services
             using (var _ = _dbContextScopeFactory.Create())
             {
                 return _repository.GetRevenueOnDate(dateTime, userId);
+            }
+        }
+
+        public void DeleteSell(Sell sell)
+        {
+            using (var ctx = _dbContextScopeFactory.Create())
+            {
+                _repository.DeleteSell(sell);
+                ctx.SaveChanges();
             }
         }
     }

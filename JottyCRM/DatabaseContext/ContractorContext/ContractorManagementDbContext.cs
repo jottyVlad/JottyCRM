@@ -1,6 +1,5 @@
 using System.Data.Entity;
 using System.Reflection;
-using JottyCRM.Models;
 using JottyCRM.Models.Contractor;
 
 namespace JottyCRM.DatabaseContext.ContractorContext

@@ -28,7 +28,19 @@
             Grid.Row="1" 
             Margin="0 20 0 0" 
             ItemsSource="{Binding ContractorsList}"
-            Background="Beige">
+            Background="Beige"
+            x:Name="TableList">
+            <ListView.Resources>
+                <ContextMenu x:Key="ItemContextMenu" x:Name="ContextMenu">
+                    <MenuItem Click="MenuItem_OnClick" Header="Удалить"></MenuItem>
+                </ContextMenu>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="OnListViewItem_PreviewMouseLeftButtonDown" />
+                    <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID"></GridViewColumn>

@@ -61,7 +61,7 @@ namespace JottyCRM.ViewModel
             CloseWindowNavigationService closeNavigationService)
         {
             ChangePasswordCommand = new ChangePasswordCommand(this, userStore, userService, profileNavigationService);
-            CloseWindowCommand = new CloseWindowCommand(this, closeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
             
             var changePasswordWindow = new ChangePasswordView()
             {

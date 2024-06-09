@@ -59,15 +59,15 @@ namespace JottyCRM.ViewModel
         public ICommand CloseWindowCommand { get; set; }
 
         public CreateLeadViewModel(UserStore userStore,
-            LeadsStore leadsStore,
+            ILeadService leadService,
             INavigationService navigationService,
             CloseWindowNavigationService closeWindowNavigationService
             )
         {
             CreatedAt = DateTime.Now.Date;
             CreateLeadCommand = new CreateLeadCommand(this,
-                userStore, navigationService, leadsStore);
-            CloseWindowCommand = new CloseWindowCommand(this, closeWindowNavigationService);
+                userStore, navigationService, leadService);
+            CloseWindowCommand = new CloseWindowCommand(closeWindowNavigationService);
             var createLeadWindow = new CreateLeadView()
             {
                 DataContext = this

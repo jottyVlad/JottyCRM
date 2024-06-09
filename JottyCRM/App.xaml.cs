@@ -203,7 +203,7 @@ namespace JottyCRM
                 serviceProvider.GetRequiredService<WindowNavigationStore>());
 
             return new CreateLeadViewModel(serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<LeadsStore>(),
+                serviceProvider.GetRequiredService<ILeadService>(),
                 createLeadNavigationService,
                 closeNavigationService);
         }

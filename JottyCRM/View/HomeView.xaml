@@ -7,9 +7,5 @@
              xmlns:components="clr-namespace:JottyCRM.View.Components"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1400">
-    <Grid Width="1400" Height="600">
-        
-        
-        
-    </Grid>
+    <Grid Width="1400" Height="600"></Grid>
 </UserControl>

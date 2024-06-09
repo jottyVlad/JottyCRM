@@ -6,7 +6,7 @@ namespace JottyCRM.DatabaseContext.LeadContext
 {
     public class LeadManagementDbContext : DbContext
     {
-        public System.Data.Entity.DbSet<Lead> Leads { get; set; }
+        public DbSet<Lead> Leads { get; set; }
 
         public LeadManagementDbContext() : base("DBConnection") { }
 

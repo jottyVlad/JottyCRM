@@ -11,13 +11,15 @@ namespace JottyCRM.ViewModel
 {
     public class SellsViewModel : BaseViewModel
     {
-        private readonly ISellService _sellService;
+        public readonly ISellService _sellService;
         private readonly UserStore _userStore;
         private readonly SellsStore _sellsStore;
 
         public List<Sell> SellsList => _sellService.GetAll(_userStore.CurrentUser.Id);
         
         public ICommand NavigateToCreateSellCommand { get; set; }
+        
+        public ICommand DeleteSell { get; set; }
 
         public SellsViewModel(ISellService sellService,
             UserStore userStore,

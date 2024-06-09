@@ -12,6 +12,7 @@ namespace JottyCRM.Services
         Contractor Create(string fullName, string email, string phoneNumber, User user);
         List<Contractor> GetAll(int userId);
         List<UserPropertyContractor> GetUserProperties(int userId);
+        void DeleteContractor(Contractor contractor);
     }
     
     public class ContractorService : IContractorService
@@ -38,6 +39,15 @@ namespace JottyCRM.Services
             using (var _ = _dbContextScopeFactory.Create())
             {
                 return _repository.GetUserProperties(userId);
+            }
+        }
+
+        public void DeleteContractor(Contractor contractor)
+        {
+            using (var ctx = _dbContextScopeFactory.Create())
+            {
+                _repository.DeleteContractor(contractor);
+                ctx.SaveChanges();
             }
         }
 

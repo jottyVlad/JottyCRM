@@ -1,5 +1,4 @@
 using System;
-using JottyCRM.Models.Contractor;
 
 namespace JottyCRM.Stores
 {

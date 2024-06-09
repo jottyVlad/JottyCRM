@@ -61,7 +61,7 @@ namespace JottyCRM.ViewModel
             CloseWindowNavigationService closeNavigationService)
         {
             RegisterCommand = new RegisterCommand(this, userService, userStore, homeNavigationService);
-            CloseWindowCommand = new CloseWindowCommand(this, closeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
             
             var registrationWindow = new RegistrationView()
             {

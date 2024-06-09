@@ -53,7 +53,7 @@ namespace JottyCRM.ViewModel
         {
             CreateContractorCommand = new CreateContractorCommand(this,
                 userStore, navigationService, contractorService);
-            CloseWindowCommand = new CloseWindowCommand(this, closeWindowNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeWindowNavigationService);
             var createContractorWindow = new CreateContractorView()
             {
                 DataContext = this

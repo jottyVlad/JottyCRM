@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using JottyCRM.Core;
 using JottyCRM.Services;
 using JottyCRM.View;
 using JottyCRM.ViewModel;
-using MaterialDesignThemes.Wpf;
 
 namespace JottyCRM.Commands
 {
@@ -42,7 +39,5 @@ namespace JottyCRM.Commands
             };
             chartView.ShowDialog();
         }
-        
-        
     }
 }

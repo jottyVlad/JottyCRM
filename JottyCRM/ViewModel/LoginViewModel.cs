@@ -72,7 +72,7 @@ namespace JottyCRM.ViewModel
             CloseWindowNavigationService closeNavigationService)
         {
             LoginCommand = new LoginCommand(this, userService, userStore, homeNavigationService);
-            CloseWindowCommand = new CloseWindowCommand(this, closeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
             
             var loginWindow = new LoginView()
             {

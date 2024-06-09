@@ -5,12 +5,10 @@ namespace JottyCRM.Commands
 {
     public class CloseWindowCommand : BaseCommand
     {
-        private readonly BaseWindowViewModel _loginViewModel;
         private readonly CloseWindowNavigationService _navigationService;
 
-        public CloseWindowCommand(BaseWindowViewModel loginViewModel, CloseWindowNavigationService navigationService)
+        public CloseWindowCommand(CloseWindowNavigationService navigationService)
         {
-            _loginViewModel = loginViewModel;
             _navigationService = navigationService;
         }
         

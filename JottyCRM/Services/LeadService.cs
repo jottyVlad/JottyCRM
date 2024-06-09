@@ -13,6 +13,7 @@ namespace JottyCRM.Services
         Lead Create(string name, string status, string description, DateTime createdAt, User user);
         List<Lead> GetAll(int userId);
         int GetCountOfLeadsOnDate(DateTime dateTime, int userId);
+        void DeleteLead(Lead lead);
     }
     
     public class LeadService : ILeadService
@@ -62,6 +63,15 @@ namespace JottyCRM.Services
             using (var _ = _dbContextScopeFactory.Create())
             {
                 return _repository.GetCountOfLeadsOnDate(dateTime, userId);
+            }
+        }
+
+        public void DeleteLead(Lead lead)
+        {
+            using (var ctx = _dbContextScopeFactory.Create())
+            {
+                _repository.DeleteLead(lead);
+                ctx.SaveChanges();
             }
         }
     }

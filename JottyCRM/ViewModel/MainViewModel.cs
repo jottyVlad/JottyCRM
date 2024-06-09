@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using JottyCRM.Commands;
-using JottyCRM.Core;
 using JottyCRM.Services;
 using JottyCRM.Stores;
 
@@ -19,7 +18,7 @@ namespace JottyCRM.ViewModel
             _navigationStore = navigationStore;
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-            CloseWindowCommand = new CloseWindowCommand(this, closeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
         }
 
         private void OnCurrentViewModelChanged()

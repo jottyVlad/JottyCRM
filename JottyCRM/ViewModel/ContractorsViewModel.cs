@@ -3,7 +3,6 @@ using System.Windows.Input;
 using JottyCRM.Commands;
 using JottyCRM.Core;
 using JottyCRM.Models.Contractor;
-using JottyCRM.repositories;
 using JottyCRM.Services;
 using JottyCRM.Stores;
 
@@ -11,7 +10,7 @@ namespace JottyCRM.ViewModel
 {
     public class ContractorsViewModel : BaseViewModel
     {
-        private readonly IContractorService _contractorService;
+        public readonly IContractorService _contractorService;
         private readonly UserStore _userStore;
         private readonly ContractorsStore _contractorsStore;
         public List<Contractor> ContractorsList => _contractorService.GetAll(_userStore.CurrentUser.Id);
@@ -20,6 +19,7 @@ namespace JottyCRM.ViewModel
             _contractorService.GetUserProperties(_userStore.CurrentUser.Id);
 
         public ICommand NavigateToCreateContractorCommand { get; }
+        public ICommand DeleteContractor { get; set; }
 
         public ContractorsViewModel(IContractorService contractorService, 
             UserStore userStore,
@@ -33,8 +33,6 @@ namespace JottyCRM.ViewModel
             _contractorsStore.ContractorCreated += OnContractorAdded;
 
             NavigateToCreateContractorCommand = new NavigateCommand(createContractorNavigationService);
-
-            //ContractorsList = contractorService.GetAll(userStore.CurrentUser.Id);
         }
 
         private void OnContractorAdded(string fullName, string email, string phoneNumber)

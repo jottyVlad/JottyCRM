@@ -66,7 +66,7 @@ namespace JottyCRM.ViewModel
             SellDateTime = DateTime.Now.Date;
             CreateSellCommand = new CreateSellCommand(this,
                 userStore, navigationService, sellService);
-            CloseWindowCommand = new CloseWindowCommand(this, closeWindowNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeWindowNavigationService);
             var createSellWindow = new CreateSellView()
             {
                 DataContext = this

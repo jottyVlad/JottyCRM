@@ -1,4 +1,5 @@
-﻿using JottyCRM.Core;
+﻿using System.Windows;
+using JottyCRM.Core;
 using JottyCRM.Services;
 using JottyCRM.ViewModel;
 
@@ -31,7 +32,7 @@ namespace JottyCRM.Commands
 
             if (!authorizedStatus.StatusCode)
             {
-                _loginViewModel.Error = "Неверный логин или пароль!";
+                MessageBox.Show("Неверный логин или пароль!");
                 return;
             }
 

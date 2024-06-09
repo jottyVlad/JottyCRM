@@ -1,5 +1,4 @@
 using JottyCRM.Core;
-using JottyCRM.Models.Contractor;
 using JottyCRM.Services;
 using JottyCRM.ViewModel;
 

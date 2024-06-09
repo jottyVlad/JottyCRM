@@ -20,35 +20,6 @@
                     </wf:Chart.ChartAreas>
                 </wf:Chart>
             </WindowsFormsHost>
-            <!--<dxc:ChartControl Name="chartControl1">
-                <dxc:ChartControl.Diagram>
-                    <dxc:XYDiagram2D>
-                        <dxc:XYDiagram2D.Series>
-                            <dxc:LineSeries2D DisplayName="{Binding DisplayName}" 
-                                              DataSource="{Binding DataPoints}" 
-                                              ArgumentScaleType="DateTime"
-                                              ArgumentDataMember="Date"
-                                              ValueDataMember="Value"
-                                              LabelsVisibility="True"
-                                              
-                                              MarkerSize="14" 
-                                              MarkerVisible="True">
-                                <dxc:LineSeries2D.MarkerModel>
-                                    <dxc:RingMarker2DModel/>
-                                </dxc:LineSeries2D.MarkerModel>
-                                <dxc:LineSeries2D.Label>
-                                    <dxc:SeriesLabel TextPattern="{}{V:f1}" 
-                                                     dxc:MarkerSeries2D.Angle="90" 
-                                                     ConnectorVisible="False"/>
-                                </dxc:LineSeries2D.Label>
-                            </dxc:LineSeries2D>
-                        </dxc:XYDiagram2D.Series>
-                    </dxc:XYDiagram2D>
-                </dxc:ChartControl.Diagram>
-                ~1~<dxc:ChartControl.Legend>
-                    <dxc:Legend HorizontalPosition="Left"/>
-                </dxc:ChartControl.Legend>@1@
-            </dxc:ChartControl>-->
         </Grid>
     </Grid>
 </Window>

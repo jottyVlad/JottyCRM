@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JottyCRM.DatabaseContext.ContractorContext;
 using JottyCRM.DatabaseContext.SellContext;
-using JottyCRM.Models.Contractor;
 using JottyCRM.Models.Sell;
 using Mehdime.Entity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Data.Entity;
 using DbFunctions = System.Data.Entity.DbFunctions;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace JottyCRM.repositories
 {
@@ -20,6 +16,7 @@ namespace JottyCRM.repositories
         List<Sell> GetAll(int userId);
         int GetCountOfSellsOnDate(DateTime dateTime, int userId);
         Decimal GetRevenueOnDate(DateTime dateTime, int userId);
+        void DeleteSell(Sell sell);
     }
     
     public class SellRepository : ISellRepository
@@ -33,7 +30,7 @@ namespace JottyCRM.repositories
                 var dbContext = _ambientDbContextLocator.Get<SellManagementDbContext>();
 
                 if (dbContext == null)
-                    throw new InvalidOperationException("No ambient DbContext of type SellManagementDbContext found. This means that this repository method has been called outside of the scope of a DbContextScope. A repository must only be accessed within the scope of a DbContextScope, which takes care of creating the DbContext instances that the repositories need and making them available as ambient contexts. This is what ensures that, for any given DbContext-derived type, the same instance is used throughout the duration of a business transaction. To fix this issue, use IDbContextScopeFactory in your top-level business logic service method to create a DbContextScope that wraps the entire business transaction that your service method implements. Then access this repository within that scope. Refer to the comments in the IDbContextScope.cs file for more details.");
+                    throw new InvalidOperationException("Не найден DbContext");
 
                 return dbContext;
             }
@@ -61,6 +58,11 @@ namespace JottyCRM.repositories
             var sells = DbContext.Sells.Where(s =>
                 DbFunctions.TruncateTime(s.SellDateTime) == dateTime.Date && s.UserId == userId).ToList();
             return sells.Count == 0 ? 0 : sells.Sum(s => s.AmountOfTransaction);
+        }
+
+        public void DeleteSell(Sell sell)
+        {
+            DbContext.Entry(sell).State = EntityState.Deleted;
         }
 
         public Sell CreateSell(Sell sell)

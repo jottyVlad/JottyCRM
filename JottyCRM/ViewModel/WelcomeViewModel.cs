@@ -6,8 +6,6 @@ namespace JottyCRM.ViewModel
 {
     public class WelcomeViewModel : BaseViewModel
     {
-        public string Name => "WelcomeViewModel";
-
         public ICommand NavigateLoginCommand { get; }
         public ICommand NavigateRegistrationCommand { get; }
 

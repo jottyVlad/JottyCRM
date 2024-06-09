@@ -245,6 +245,9 @@
     <Compile Include="Commands\CreateContractorCommand.cs" />
     <Compile Include="Commands\CreateLeadCommand.cs" />
     <Compile Include="Commands\CreateSellCommand.cs" />
+    <Compile Include="Commands\DeleteContractorCommand.cs" />
+    <Compile Include="Commands\DeleteLeadCommand.cs" />
+    <Compile Include="Commands\DeleteSellCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
@@ -294,7 +297,6 @@
     <Compile Include="Stores\SellsStore.cs" />
     <Compile Include="Stores\UserStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
-    <Compile Include="DatabaseContext\UserContext\UserFluentMap.cs" />
     <Compile Include="DatabaseContext\UserContext\UserManagementDbContext.cs" />
     <Compile Include="Repositories\User.cs" />
     <Compile Include="Services\NavigationService.cs" />
@@ -368,6 +370,7 @@
     <Compile Include="View\SellsView.xaml.cs">
       <DependentUpon>SellsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Utils\MyVisualTreeHelper.cs" />
     <Compile Include="View\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
