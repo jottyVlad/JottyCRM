@@ -4,10 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:JottyCRM.View"
+             xmlns:components="clr-namespace:JottyCRM.View.Components"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="900">
-    <Grid RenderTransformOrigin="0.5,0.502" Background="Wheat" Height="600" Width="900">
-        <Label Content="{Binding Name}" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 150"/>
-        <Button Content="Exit" Width="200" Height="40"/>
-    </Grid>
+             d:DesignHeight="600" d:DesignWidth="1400">
+    <Grid Width="1400" Height="600"></Grid>
 </UserControl>

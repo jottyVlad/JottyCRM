@@ -1,11 +1,12 @@
 using System.Windows.Input;
 using JottyCRM.Commands;
 using JottyCRM.Core;
-using JottyCRM.services;
+using JottyCRM.Services;
+using JottyCRM.View;
 
 namespace JottyCRM.ViewModel
 {
-    public class RegistrationViewModel : BaseViewModel
+    public class RegistrationViewModel : BaseWindowViewModel
     {
         private string _name;
         public string Name
@@ -53,11 +54,20 @@ namespace JottyCRM.ViewModel
         }
         
         public ICommand RegisterCommand { get; }
+        public new ICommand CloseWindowCommand { get; }
 
         public RegistrationViewModel(UserStore userStore, IUserService userService,
-            INavigationService homeNavigationService)
+            INavigationService homeNavigationService,
+            CloseWindowNavigationService closeNavigationService)
         {
             RegisterCommand = new RegisterCommand(this, userService, userStore, homeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
+            
+            var registrationWindow = new RegistrationView()
+            {
+                DataContext = this
+            };
+            registrationWindow.ShowDialog();
         }
     }
 }

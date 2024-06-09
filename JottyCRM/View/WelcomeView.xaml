@@ -3,25 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:JottyCRM.View"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="900">
-    <Grid Background="Wheat" Height="600" Width="900">
-        <Button x:Name="LoginButton" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Top" 
-                Content="Авторизоваться" 
-                Margin="344,185,344,217"
-                Height="50"
-                Width="150"
-                Command="{Binding NavigateLoginCommand}"/>
-        <Button x:Name="RegistrationButton" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Top" 
-                Content="Зарегистрироваться" 
-                Margin="333,250,333,165" 
-                Height="50" 
-                Width="150"
-                Command="{Binding NavigateRegistrationCommand}"/>
+    <Grid Height="600" Width="900">
+        <StackPanel>
+            <Image x:Name="Logo" Margin="0 60 0 0" Source="{StaticResource JottyLogo}" Height="100" />
+            <TextBlock x:Name="WelcomeCaption"
+                Margin="0 40 0 0"
+                HorizontalAlignment="Center"
+                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                FontFamily="{StaticResource MaterialDesignFont}"
+                FontWeight="Bold">Добро пожаловать в JottyCRM</TextBlock>
+
+            <Button x:Name="LoginButton" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Content="Авторизоваться" 
+                    Margin="0,50,0,0"
+                    FontFamily="{StaticResource MaterialDesignFont}"
+                    Height="50"
+                    MinWidth="180"
+                    Command="{Binding NavigateLoginCommand}"/>
+            <Button x:Name="RegistrationButton" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Content="Зарегистрироваться" 
+                    Margin="0, 50,0,0" 
+                    FontFamily="{StaticResource MaterialDesignFont}"
+                    Height="50" 
+                    MinWidth="180"
+                    Command="{Binding NavigateRegistrationCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

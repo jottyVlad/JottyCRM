@@ -1,5 +1,6 @@
-﻿using JottyCRM.Core;
-using JottyCRM.services;
+﻿using System.Windows;
+using JottyCRM.Core;
+using JottyCRM.Services;
 using JottyCRM.ViewModel;
 
 namespace JottyCRM.Commands
@@ -22,16 +23,16 @@ namespace JottyCRM.Commands
             _navigationService = navigationService;
         }
 
-        public override async void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             string login = _loginViewModel.Login;
             string password = _loginViewModel.Password;
-
-            UserAuthorized authorizedStatus = await _userService.TryAuthorize(login, password);
+            
+            UserAuthorized authorizedStatus = _userService.TryAuthorize(login, password);
 
             if (!authorizedStatus.StatusCode)
             {
-                _loginViewModel.Error = "Неверный логин или пароль!";
+                MessageBox.Show("Неверный логин или пароль!");
                 return;
             }
 

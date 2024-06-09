@@ -65,17 +65,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=3.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.3.0.0-alpha0492\lib\net462\MahApps.Metro.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.1.4\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=3.0.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.3.0.0\lib\net462\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.MahApps, Version=0.0.111.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.MahApps.163.0.0.111\lib\net45\MaterialDesignThemes.MahApps.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=5.0.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.5.0.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Mehdime.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mehdime.Entity.1.0.0\lib\Mehdime.Entity.dll</HintPath>
@@ -221,6 +215,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -233,6 +228,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -240,24 +236,123 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\ChangePasswordCommand.cs" />
+    <Compile Include="Commands\CloseWindowCommand.cs" />
+    <Compile Include="Commands\CommandsUtils.cs" />
+    <Compile Include="Commands\CreateChartCountOfLeadsCommand.cs" />
+    <Compile Include="Commands\CreateChartCountOfSellsCommand.cs" />
+    <Compile Include="Commands\CreateChartRevenueSellsCommand.cs" />
+    <Compile Include="Commands\CreateContractorCommand.cs" />
+    <Compile Include="Commands\CreateLeadCommand.cs" />
+    <Compile Include="Commands\CreateSellCommand.cs" />
+    <Compile Include="Commands\DeleteContractorCommand.cs" />
+    <Compile Include="Commands\DeleteLeadCommand.cs" />
+    <Compile Include="Commands\DeleteSellCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RegisterCommand.cs" />
+    <Compile Include="DatabaseContext\ContractorContext\ContractorManagementDbContext.cs" />
+    <Compile Include="DatabaseContext\ApplicationDatabaseContext.cs" />
+    <Compile Include="DatabaseContext\LeadContext\LeadManagementDbContext.cs" />
+    <Compile Include="DatabaseContext\SellContext\SellManagementDbContext.cs" />
+    <Compile Include="Migrations\202405180830177_AddedTables.cs" />
+    <Compile Include="Migrations\202405180830177_AddedTables.Designer.cs">
+      <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405181842287_CreateLeads.cs" />
+    <Compile Include="Migrations\202405181842287_CreateLeads.Designer.cs">
+      <DependentUpon>202405181842287_CreateLeads.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405181910488_todatetime2.cs" />
+    <Compile Include="Migrations\202405181910488_todatetime2.Designer.cs">
+      <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405191015486_AddedAmountOfTransaction.cs" />
+    <Compile Include="Migrations\202405191015486_AddedAmountOfTransaction.Designer.cs">
+      <DependentUpon>202405191015486_AddedAmountOfTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Contractor\Contractor.cs" />
+    <Compile Include="Models\Contractor\UserPropertyContractor.cs" />
+    <Compile Include="Models\Contractor\UserPropertyContractorValueToBase.cs" />
+    <Compile Include="Models\Lead\Lead.cs" />
+    <Compile Include="Models\Lead\UserPropertyLeadValueToBase.cs" />
+    <Compile Include="Models\Lead\UserPropertyLead.cs" />
+    <Compile Include="Models\Sell\Sell.cs" />
+    <Compile Include="Models\Sell\UserPropertySell.cs" />
+    <Compile Include="Models\Sell\UserPropertySellValueToBase.cs" />
+    <Compile Include="Repositories\Contractor.cs" />
+    <Compile Include="Repositories\Lead.cs" />
+    <Compile Include="Repositories\Sell.cs" />
+    <Compile Include="Services\CloseWindowNavigationService.cs" />
+    <Compile Include="Services\CompositeNavigationService.cs" />
+    <Compile Include="Services\ContractorService.cs" />
+    <Compile Include="Services\LeadService.cs" />
+    <Compile Include="Services\SellService.cs" />
+    <Compile Include="Services\WithNavbarNavigationService.cs" />
+    <Compile Include="Services\WindowNavigationService.cs" />
+    <Compile Include="Stores\ContractorsStore.cs" />
+    <Compile Include="Stores\LeadsStore.cs" />
+    <Compile Include="Stores\SellsStore.cs" />
     <Compile Include="Stores\UserStore.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
-    <Compile Include="DatabaseContext\UserContext\UserFluentMap.cs" />
     <Compile Include="DatabaseContext\UserContext\UserManagementDbContext.cs" />
     <Compile Include="Repositories\User.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Stores\WindowNavigationStore.cs" />
+    <Compile Include="ViewModel\AnalyticsViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\ChartViewModel.cs" />
+    <Compile Include="ViewModel\ContractorsViewModel.cs" />
+    <Compile Include="ViewModel\CreateContractorViewModel.cs" />
+    <Compile Include="ViewModel\CreateLeadViewModel.cs" />
+    <Compile Include="ViewModel\CreateSellViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\BaseWindowViewModel.cs" />
+    <Compile Include="ViewModel\LeadsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NavbarViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="ViewModel\SellsViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Compile Include="ViewModel\WithNavbarViewModel.cs" />
+    <Compile Include="View\AnalyticsView.xaml.cs">
+      <DependentUpon>AnalyticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChartView.xaml.cs">
+      <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\Layout.xaml.cs">
+      <DependentUpon>Layout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\NavBar.xaml.cs">
+      <DependentUpon>NavBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContractorsView.xaml.cs">
+      <DependentUpon>ContractorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateContractorView.xaml.cs">
+      <DependentUpon>CreateContractorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateLeadView.xaml.cs">
+      <DependentUpon>CreateLeadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateSellView.xaml.cs">
+      <DependentUpon>CreateSellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LeadsView.xaml.cs">
+      <DependentUpon>LeadsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -266,9 +361,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SellsView.xaml.cs">
+      <DependentUpon>SellsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Utils\MyVisualTreeHelper.cs" />
     <Compile Include="View\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
@@ -276,13 +378,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AnalyticsView.xaml" />
+    <Page Include="View\ChangePasswordView.xaml" />
+    <Page Include="View\ChartView.xaml" />
+    <Page Include="View\Components\Layout.xaml" />
+    <Page Include="View\Components\NavBar.xaml" />
+    <Page Include="View\ContractorsView.xaml" />
+    <Page Include="View\CreateContractorView.xaml" />
+    <Page Include="View\CreateLeadView.xaml" />
+    <Page Include="View\CreateSellView.xaml" />
     <Page Include="View\HomeView.xaml" />
+    <Page Include="View\LeadsView.xaml" />
     <Page Include="View\LoginView.xaml" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ProfileView.xaml" />
     <Page Include="View\RegistrationView.xaml" />
+    <Page Include="View\SellsView.xaml" />
     <Page Include="View\WelcomeView.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -300,16 +414,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202405180830177_AddedTables.resx">
+      <DependentUpon>202405180830177_AddedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405181842287_CreateLeads.resx">
+      <DependentUpon>202405181842287_CreateLeads.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405181910488_todatetime2.resx">
+      <DependentUpon>202405181910488_todatetime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405191015486_AddedAmountOfTransaction.resx">
+      <DependentUpon>202405191015486_AddedAmountOfTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\Klukva.otf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Images\logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -326,17 +452,23 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\closeWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\closeBlack.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.5.0.0\build\MaterialDesignThemes.targets'))" />
     <Error Condition="!Exists('..\packages\ShowMeTheXAML.MSBuild.2.0.0\build\net472\ShowMeTheXAML.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ShowMeTheXAML.MSBuild.2.0.0\build\net472\ShowMeTheXAML.MSBuild.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets'))" />
   </Target>
   <Import Project="..\packages\ShowMeTheXAML.MSBuild.2.0.0\build\net472\ShowMeTheXAML.MSBuild.targets" Condition="Exists('..\packages\ShowMeTheXAML.MSBuild.2.0.0\build\net472\ShowMeTheXAML.MSBuild.targets')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
 </Project>

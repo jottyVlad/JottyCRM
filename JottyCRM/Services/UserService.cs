@@ -2,18 +2,19 @@
 using JottyCRM.repositories;
 using Mehdime.Entity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace JottyCRM.services
+namespace JottyCRM.Services
 {
     public interface IUserService
     {
-        Task<UserAuthorized> TryAuthorize(string login, string password);
+        UserAuthorized TryAuthorize(string login, string password);
         UserRegistered Create(string name, string login, string email, string password);
+
+        User ChangePassword(User currentUser, string currentPassword, string newPassword,
+            string newPasswordConfirmation);
     }
     public class UserService : IUserService
     {
@@ -40,16 +41,16 @@ namespace JottyCRM.services
             }
         }
 
-        public async Task<UserAuthorized> TryAuthorize(string login, string password)
+        public UserAuthorized TryAuthorize(string login, string password)
         {
-            if (String.IsNullOrEmpty(login))
+            if (String.IsNullOrEmpty(login) || String.IsNullOrEmpty(password))
             {
                 return new UserAuthorized(null, false);
             }
 
             User _user;
             using(var dbContextScope = _dbContextScopeFactory.Create()) {
-                _user = await _repository.GetUserByLoginAsync(login);
+                _user = _repository.GetUserByLogin(login);
             }
             if(_user == null)
             {
@@ -95,6 +96,24 @@ namespace JottyCRM.services
                 _repository.Create(user);
                 dbContextScope.SaveChanges();
                 return new UserRegistered(user, true, "");
+            }
+        }
+
+        public User ChangePassword(User currentUser, string currentPassword, string newPassword, 
+            string newPasswordConfirmation)
+        {
+            if (currentPassword == null)
+                return null;
+            if (sha256_hash(currentPassword) != currentUser.Password)
+                return null;
+            if (newPassword != newPasswordConfirmation || newPassword == null)
+                return null;
+
+            using (var ctx = _dbContextScopeFactory.Create())
+            {
+                var newUser = _repository.ChangePassword(sha256_hash(newPassword), currentUser);
+                ctx.SaveChanges();
+                return newUser;
             }
         }
     }

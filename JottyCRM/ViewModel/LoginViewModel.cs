@@ -1,11 +1,12 @@
 ﻿using System.Windows.Input;
 using JottyCRM.Commands;
 using JottyCRM.Core;
-using JottyCRM.services;
+using JottyCRM.Services;
+using JottyCRM.View;
 
 namespace JottyCRM.ViewModel
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseWindowViewModel
     {
         private string _name;
         public string Name
@@ -64,11 +65,20 @@ namespace JottyCRM.ViewModel
         }
 
         public ICommand LoginCommand { get; }
-        public LoginViewModel(UserStore userStore, IUserService userService, INavigationService homeNavigationService)
+        public ICommand CloseWindowCommand { get; }
+        
+        public LoginViewModel(UserStore userStore, IUserService userService, 
+            INavigationService homeNavigationService,
+            CloseWindowNavigationService closeNavigationService)
         {
             LoginCommand = new LoginCommand(this, userService, userStore, homeNavigationService);
+            CloseWindowCommand = new CloseWindowCommand(closeNavigationService);
+            
+            var loginWindow = new LoginView()
+            {
+                DataContext = this
+            };
+            loginWindow.ShowDialog();
         }
-        
-        
     }
 }
